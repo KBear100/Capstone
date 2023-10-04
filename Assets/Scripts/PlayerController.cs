@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float speed;
+    [Header("Inventory")]
+    [SerializeField] Inventory inventory;
+    [SerializeField] GameObject inventoryUI;
 
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
-    List<GameObject> inventory;
 
     void Start()
     {
@@ -23,5 +25,19 @@ public class PlayerController : MonoBehaviour
         vel.y = Input.GetAxis("Vertical") * speed;
 
         rb.velocity = vel;
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            if (inventoryUI.activeInHierarchy)
+            {
+                inventoryUI.SetActive(false);
+                inventory.Clear();
+            }
+            else
+            {
+                inventoryUI.SetActive(true);
+                inventory.Display();
+            }
+        }
     }
 }

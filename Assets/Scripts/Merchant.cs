@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Merchant : MonoBehaviour
 {
-    [SerializeField] GameObject ShopUI;
+    [SerializeField] GameObject shopUI;
+    [SerializeField] Inventory inventory;
 
     void Start()
     {
@@ -20,16 +21,22 @@ public class Merchant : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ShopUI.gameObject.SetActive(true);
+        shopUI.gameObject.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        ShopUI.gameObject.SetActive(false);
+        shopUI.gameObject.SetActive(false);
     }
 
     public void ExitShop()
     {
-        ShopUI.gameObject.SetActive(false);
+        shopUI.gameObject.SetActive(false);
+    }
+
+    public void Buy(string item)
+    {
+        inventory.numItems++;
+        inventory.items.Add(item);
     }
 }

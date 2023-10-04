@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7791753305731701442}
   - component: {fileID: 2779986007520326365}
+  - component: {fileID: 3252532712972859921}
   - component: {fileID: 6070911773956803277}
   - component: {fileID: 6193251707382998048}
   - component: {fileID: 1000788859}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +50,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  InventoryUI: {fileID: 0}
+--- !u!114 &3252532712972859921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406672048537006459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982cfbcd3bc4b57488a2fc440441b38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsText: {fileID: 0}
+  items: []
+  numItems: 0
 --- !u!212 &6070911773956803277
 SpriteRenderer:
   m_ObjectHideFlags: 0
