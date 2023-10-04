@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
+    List<GameObject> inventory;
 
     void Start()
     {
