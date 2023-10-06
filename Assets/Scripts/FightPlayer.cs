@@ -6,18 +6,22 @@ using static UnityEditor.Progress;
 
 public class FightPlayer : MonoBehaviour
 {
-    [Header("Inventory")]
+    [Header("Stats")]
+    public float health = 100;
     [SerializeField] Inventory inventory;
     [Header("Enemy")]
     [SerializeField] GameObject enemy;
 
+    [HideInInspector] public bool turn = true;
+    [HideInInspector] public string action;
+    [HideInInspector] public int damage;
+    [HideInInspector] public float incomingDamage;
+
     int weaponMod;
-    int damage;
-    int incomingDamage;
 
     void Start()
     {
-        
+        incomingDamage = 1;
     }
 
     void Update()
@@ -28,12 +32,13 @@ public class FightPlayer : MonoBehaviour
     public void Attack()
     {
         damage = Random.Range(1, 5) + weaponMod;
-
+        action = "Attack";
     }
 
     public void Defend()
     {
-
+        incomingDamage = 0.5f;
+        action = "Defend";
     }
 
     public void Item(TMP_Text item)
@@ -41,5 +46,6 @@ public class FightPlayer : MonoBehaviour
         inventory.items.Remove(item.text);
         item.text = "";
         if (inventory.numItems > 0) inventory.numItems--;
+        action = "Item";
     }
 }
