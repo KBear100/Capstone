@@ -39,5 +39,6 @@ public class PlayerController : MonoBehaviour
                 inventory.Display();
             }
         }
+        if(Input.GetKeyDown(KeyCode.Escape)) inventoryUI.SetActive(false);
     }
 }

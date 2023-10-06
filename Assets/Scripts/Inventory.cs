@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] TMP_Text itemsText;
+    [Header("Variables")]
+    [SerializeField] TMP_Text[] itemsText;
+    [SerializeField] public int maxItems = 8;
 
+    [Header("Stats")]
     public List<string> items = new List<string>();
     public int numItems = 0;
 
     void Start()
     {
-        itemsText.text = "";
+        foreach (var item in itemsText) item.text = "";
     }
 
     void Update()
@@ -22,19 +25,21 @@ public class Inventory : MonoBehaviour
 
     public void Clear()
     {
-        itemsText.text = "";
+        foreach (var item in itemsText) item.text = "";
     }
 
     public void Display()
     {
-        foreach(var item in items)
+        for(int i = 0; i < numItems; i++)
         {
-            itemsText.text += item + " ";
+            itemsText[i].text = items[i];
         }
     }
 
-    public void Use()
+    public void Use(TMP_Text item)
     {
-
+        items.Remove(item.text);
+        item.text = "";
+        if(numItems > 0) numItems--;
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -34,9 +36,14 @@ public class Merchant : MonoBehaviour
         shopUI.gameObject.SetActive(false);
     }
 
-    public void Buy(string item)
+    public void Buy(TMP_Text item)
     {
+        if(inventory.items.Count == inventory.maxItems)
+        {
+            Debug.Log("Full");
+            return;
+        }
         inventory.numItems++;
-        inventory.items.Add(item);
+        inventory.items.Add(item.text);
     }
 }
