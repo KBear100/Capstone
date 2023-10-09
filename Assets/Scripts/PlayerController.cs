@@ -7,9 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float speed;
-    [Header("Inventory")]
-    [SerializeField] Inventory inventory;
-    [SerializeField] GameObject inventoryUI;
 
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
@@ -28,17 +25,19 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.I))
         {
-            if (inventoryUI.activeInHierarchy)
+            if (MainManager.inventoryUI.activeInHierarchy)
             {
-                inventoryUI.SetActive(false);
-                inventory.Clear();
+                MainManager.ExitInventory();
             }
             else
             {
-                inventoryUI.SetActive(true);
-                inventory.Display();
+                MainManager.inventoryUI.SetActive(true);
+                MainManager.inventory.Display();
             }
         }
-        if(Input.GetKeyDown(KeyCode.Escape)) inventoryUI.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            MainManager.ExitInventory();
+        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8175812668478246063}
   - component: {fileID: 6014041599524372307}
   - component: {fileID: 4731121197872626684}
+  - component: {fileID: 7727405685950461724}
   m_Layer: 0
   m_Name: Patrol Enemy
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
-  waitTimer: 0
+  waitTimer: 2
 --- !u!212 &6014041599524372307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,3 +125,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &7727405685950461724
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014041599524372306}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

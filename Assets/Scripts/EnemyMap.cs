@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMap : MonoBehaviour
@@ -19,7 +20,8 @@ public class EnemyMap : MonoBehaviour
     enum State
     {
         IDLE,
-        PATROL
+        PATROL,
+        FIGHT
     }
 
     State state = State.IDLE;
@@ -67,6 +69,9 @@ public class EnemyMap : MonoBehaviour
                     dir.y = 0;
                 }
                 break;
+            case State.FIGHT:
+                Destroy(gameObject);
+                break;
         }
 
         vel = dir * speed;
@@ -82,5 +87,11 @@ public class EnemyMap : MonoBehaviour
             temp = waypoints[i].transform;
         }
         targetWaypoint = temp;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        SceneManager.LoadSceneAsync("Fight1", LoadSceneMode.Additive);
+        state = State.FIGHT;
     }
 }

@@ -13,9 +13,12 @@ public class Inventory : MonoBehaviour
     public List<string> items = new List<string>();
     public int numItems = 0;
 
+    public bool usedItem;
+
     void Start()
     {
         foreach (var item in itemsText) item.text = "";
+        usedItem = false;
     }
 
     void Update()
@@ -26,6 +29,7 @@ public class Inventory : MonoBehaviour
     public void Clear()
     {
         foreach (var item in itemsText) item.text = "";
+        usedItem = false;
     }
 
     public void Display()
@@ -41,5 +45,6 @@ public class Inventory : MonoBehaviour
         items.Remove(item.text);
         item.text = "";
         if(numItems > 0) numItems--;
+        usedItem = true;
     }
 }

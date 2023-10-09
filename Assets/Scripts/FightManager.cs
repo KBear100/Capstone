@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
@@ -14,13 +15,15 @@ public class FightManager : MonoBehaviour
     [SerializeField] Slider enemyHealthUI;
 
     float timer;
+    float doneTimer;
 
     void Start()
     {
         fightText.text = "Prepare to Fight!";
         timer = wait;
+        doneTimer = wait;
         enemyHealthUI.maxValue = enemy.health;
-        playerHealthUI.value = player.health;
+        playerHealthUI.value = MainManager.playerHealth;
     }
 
     void Update()
@@ -35,7 +38,12 @@ public class FightManager : MonoBehaviour
                 if (enemy.health <= 0)
                 {
                     fightText.text = "Enemy Defeated!";
-                    player.action = "";
+                    //player.action = "";
+                    doneTimer -= Time.deltaTime;
+                    if(doneTimer <= 0)
+                    {
+                        SceneManager.UnloadSceneAsync("Fight1");
+                    }
                 }
                 else
                 {
@@ -52,6 +60,8 @@ public class FightManager : MonoBehaviour
             }
             else if (player.action == "Item")
             {
+                fightText.text = "Player Used an Item";
+
                 player.action = "";
                 player.turn = false;
             }
@@ -66,9 +76,9 @@ public class FightManager : MonoBehaviour
                 float damage = Random.Range(0, 5) * player.incomingDamage;
                 fightText.text = "Player Took " + damage + " Damage!";
                 playerHealthUI.value -= damage;
-                player.health -= damage;
+                MainManager.playerHealth -= damage;
                 player.incomingDamage = 1;
-                if (player.health <= 0) fightText.text = "You Lose";
+                if (MainManager.playerHealth <= 0) fightText.text = "You Lose";
                 else player.turn = true;
             }
         }
