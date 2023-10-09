@@ -11,10 +11,8 @@ public class FightPlayer : MonoBehaviour
 
     [HideInInspector] public bool turn = true;
     [HideInInspector] public string action;
-    [HideInInspector] public int damage;
+    [HideInInspector] public float damage;
     [HideInInspector] public float incomingDamage;
-
-    int weaponMod;
 
     void Start()
     {
@@ -33,7 +31,7 @@ public class FightPlayer : MonoBehaviour
 
     public void Attack()
     {
-        damage = Random.Range(1, 5) + weaponMod;
+        damage = Random.Range(1, 5) + MainManager.weaponMod;
         action = "Attack";
     }
 

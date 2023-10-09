@@ -28,6 +28,7 @@ public class FightManager : MonoBehaviour
 
     void Update()
     {
+        playerHealthUI.value = MainManager.playerHealth;
         if(player.turn)
         {
             if (player.action == "Attack")
@@ -75,7 +76,7 @@ public class FightManager : MonoBehaviour
             {
                 float damage = Random.Range(0, 5) * player.incomingDamage;
                 fightText.text = "Player Took " + damage + " Damage!";
-                playerHealthUI.value -= damage;
+                //playerHealthUI.value -= damage;
                 MainManager.playerHealth -= damage;
                 player.incomingDamage = 1;
                 if (MainManager.playerHealth <= 0) fightText.text = "You Lose";

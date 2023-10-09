@@ -11,7 +11,10 @@ public class MainManager : MonoBehaviour
     public static Inventory inventory;
     public static GameObject inventoryUI;
     public static float playerHealth = 100;
+    public static float weaponMod = 0;
     public static MainManager instance;
+
+    private float maxHealth = 100;
 
     private void Awake()
     {
@@ -33,6 +36,11 @@ public class MainManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Update()
+    {
+        if (playerHealth > maxHealth) playerHealth = maxHealth;
     }
 
     public static void ExitInventory()
