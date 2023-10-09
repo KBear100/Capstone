@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,20 +10,25 @@ using UnityEngine;
 public class Merchant : MonoBehaviour
 {
     [SerializeField] GameObject shopUI;
+    [SerializeField] TMP_Text goldText;
+    [SerializeField] TMP_Text shoppingText;
     [SerializeField] Inventory inventory;
 
-    void Start()
+    private string item;
+
+    private void Start()
     {
-        
+        shoppingText.text = "Welcome to my Shop!";
     }
 
-    void Update()
+    private void Update()
     {
-        
+        goldText.text = "Your gold: " + MainManager.gold.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        shoppingText.text = "Welcome to my Shop!";
         shopUI.gameObject.SetActive(true);
     }
 
@@ -36,14 +42,32 @@ public class Merchant : MonoBehaviour
         shopUI.gameObject.SetActive(false);
     }
 
-    public void Buy(TMP_Text item)
+    public void Buy(TMP_Text price)
     {
-        if(inventory.items.Count == inventory.maxItems)
+        if (inventory.items.Count == inventory.maxItems)
         {
-            Debug.Log("Full");
+            shoppingText.text = "You Can't Carry Any More";
             return;
         }
+
+        float cost = float.Parse(price.text.Remove(price.text.IndexOf('g')));
+
+        if(MainManager.gold < cost) shoppingText.text = "You Don't Have Enough Gold!";
+        else
+        {
+            Add(item);
+            MainManager.gold -= cost;
+        }
+    }
+
+    public void GetItem(TMP_Text item)
+    {
+        this.item = item.text;
+    }
+
+    public void Add(string item)
+    {
         inventory.numItems++;
-        inventory.items.Add(item.text);
+        inventory.items.Add(item);
     }
 }

@@ -1572,6 +1572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  gold: 3
   turn: 0
   incomingDamage: 0
 --- !u!1 &710547908

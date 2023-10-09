@@ -38,11 +38,12 @@ public class FightManager : MonoBehaviour
                 enemy.health -= player.damage;
                 if (enemy.health <= 0)
                 {
-                    fightText.text = "Enemy Defeated!";
-                    //player.action = "";
+                    fightText.text = "Enemy Defeated! You gain " + enemy.gold + " gold.";
+
                     doneTimer -= Time.deltaTime;
                     if(doneTimer <= 0)
                     {
+                        MainManager.gold += enemy.gold;
                         SceneManager.UnloadSceneAsync("Fight1");
                     }
                 }
