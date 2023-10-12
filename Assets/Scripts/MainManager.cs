@@ -10,9 +10,10 @@ public class MainManager : MonoBehaviour
 
     public static Inventory inventory;
     public static GameObject inventoryUI;
-    public static float gold = 10;
+    public static float gold = 100;
     public static float playerHealth = 100;
     public static float weaponMod = 0;
+    public static string[] enemyTypes = {"Zombie", "Ninja", "Sniper"};
     public static MainManager instance;
 
     private float maxHealth = 100;

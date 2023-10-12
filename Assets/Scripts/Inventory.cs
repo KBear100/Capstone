@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] TMP_Text[] itemsText;
     [SerializeField] TMP_Text weaponText;
     [SerializeField] TMP_Text equipmentText;
+    [SerializeField] Sprite[] sprites;
+    [SerializeField] Image[] images;
+    [SerializeField] Image weaponImage;
     [SerializeField] public int maxItems = 8;
 
     [Header("Stats")]
@@ -18,12 +22,15 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public bool usedItem;
     [HideInInspector] public string itemUsed;
 
+    private Image useImage;
+
     void Start()
     {
         foreach (var item in itemsText) item.text = "";
         weaponText.text = "Fist";
         usedItem = false;
         itemUsed = "";
+        useImage = null;
     }
 
     void Update()
@@ -34,9 +41,11 @@ public class Inventory : MonoBehaviour
                 MainManager.weaponMod = 0;
                 break;
             case "Dagger":
+                weaponImage.sprite = sprites[1];
                 MainManager.weaponMod = 2;
                 break;
             case "Sword":
+                weaponImage.sprite = sprites[2];
                 MainManager.weaponMod = 4;
                 break;
         }
@@ -45,6 +54,7 @@ public class Inventory : MonoBehaviour
     public void Clear()
     {
         foreach (var item in itemsText) item.text = "";
+        foreach (var image in images) image.sprite = null;
         usedItem = false;
         itemUsed = "";
     }
@@ -54,6 +64,19 @@ public class Inventory : MonoBehaviour
         for(int i = 0; i < numItems; i++)
         {
             itemsText[i].text = items[i];
+            switch (itemsText[i].text)
+            {
+                case "Potion":
+                    images[i].sprite = sprites[0];
+                    break;
+                case "Dagger":
+                    images[i].sprite = sprites[1];
+                    break;
+                case "Sword":
+                    images[i].sprite = sprites[2];
+                    break;
+
+            }
         }
     }
 
@@ -68,7 +91,7 @@ public class Inventory : MonoBehaviour
                 weaponText.text = item.text;
                 equipmentText.text = "Current Weapon";
 
-                RemoveItem(item);
+                RemoveItem(item, useImage);
             }
         }
         else
@@ -77,8 +100,13 @@ public class Inventory : MonoBehaviour
             itemUsed = item.text;
             usedItem = true;
 
-            RemoveItem(item);
+            RemoveItem(item, useImage);
         }
+    }
+
+    public void GetImage(Image image)
+    {
+        useImage = image;
     }
 
     public void Weapon()
@@ -87,10 +115,11 @@ public class Inventory : MonoBehaviour
         else equipmentText.text = "Choose New Weapon";
     }
 
-    private void RemoveItem(TMP_Text item)
+    private void RemoveItem(TMP_Text item, Image image)
     {
         if (numItems > 0) numItems--;
         items.Remove(item.text);
         item.text = "";
+        image.sprite = null;
     }
 }

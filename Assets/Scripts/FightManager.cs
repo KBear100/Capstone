@@ -19,7 +19,7 @@ public class FightManager : MonoBehaviour
 
     void Start()
     {
-        fightText.text = "Prepare to Fight!";
+        fightText.text = "A " + enemy.type + " Approaches. Prepare to Fight!";
         timer = wait;
         doneTimer = wait;
         enemyHealthUI.maxValue = enemy.health;
@@ -29,12 +29,13 @@ public class FightManager : MonoBehaviour
     void Update()
     {
         playerHealthUI.value = MainManager.playerHealth;
+        enemyHealthUI.value = enemy.health;
+        
         if(player.turn)
         {
             if (player.action == "Attack")
             {
-                fightText.text = "Enemy Took " + player.damage + " Damage.";
-                enemyHealthUI.value -= player.damage;
+                fightText.text = "Enemy Took " + player.damage * enemy.incomingDamage + " Damage.";
                 enemy.health -= player.damage;
                 if (enemy.health <= 0)
                 {
@@ -68,6 +69,7 @@ public class FightManager : MonoBehaviour
                 player.turn = false;
             }
             timer = wait;
+            enemy.incomingDamage = 1;
         }
         else
         {
@@ -75,11 +77,21 @@ public class FightManager : MonoBehaviour
 
             if(timer <= 0)
             {
-                float damage = Random.Range(0, 5) * player.incomingDamage;
-                fightText.text = "Player Took " + damage + " Damage!";
-                //playerHealthUI.value -= damage;
-                MainManager.playerHealth -= damage;
+                enemy.Turn();
+                if(enemy.turn == 1)
+                {
+                    float damage = enemy.damage * player.incomingDamage;
+
+                    fightText.text = "Player Took " + damage + " Damage!";
+                    MainManager.playerHealth -= damage;
+                }
+                else if(enemy.turn == 2)
+                {
+                    fightText.text = "Enemy Defended";
+                }
+                enemy.turn = 0;
                 player.incomingDamage = 1;
+
                 if (MainManager.playerHealth <= 0) fightText.text = "You Lose";
                 else player.turn = true;
             }
