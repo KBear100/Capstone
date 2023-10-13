@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
         switch(weaponText.text)
         {
             case "Fist":
+                weaponImage.sprite = sprites[3];
                 MainManager.weaponMod = 0;
                 break;
             case "Dagger":
