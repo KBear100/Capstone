@@ -13,10 +13,12 @@ public class MainManager : MonoBehaviour
     public static float gold = 100;
     public static float playerHealth = 100;
     public static float weaponMod = 0;
+    public static int partySize = 0;
     public static string[] enemyTypes = {"Zombie", "Ninja", "Sniper"};
     public static MainManager instance;
 
     private float maxHealth = 100;
+    private int maxParty = 3;
 
     private void Awake()
     {

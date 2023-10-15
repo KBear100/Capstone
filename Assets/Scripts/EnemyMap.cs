@@ -91,7 +91,10 @@ public class EnemyMap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadSceneAsync("Fight1", LoadSceneMode.Additive);
-        state = State.FIGHT;
+        if (collision.tag == "Player")
+        {
+            SceneManager.LoadSceneAsync("Fight1", LoadSceneMode.Additive);
+            state = State.FIGHT;
+        }
     }
 }

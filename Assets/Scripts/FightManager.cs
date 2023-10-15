@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class FightManager : MonoBehaviour
 {
     [SerializeField] FightPlayer player;
+    [SerializeField] GameObject[] party;
     [SerializeField] AttackingEnemy enemy;
     [SerializeField] TMP_Text fightText;
     [SerializeField] float wait;
@@ -24,6 +25,11 @@ public class FightManager : MonoBehaviour
         doneTimer = wait;
         enemyHealthUI.maxValue = enemy.health;
         playerHealthUI.value = MainManager.playerHealth;
+
+        for (int i = 0; i < MainManager.partySize; i++)
+        {
+            party[i].SetActive(true);
+        }
     }
 
     void Update()
