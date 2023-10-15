@@ -10,16 +10,22 @@ public class PlayerController : MonoBehaviour
 
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
+    bool faceRight = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         vel.x = Input.GetAxis("Horizontal") * speed;
         vel.y = Input.GetAxis("Vertical") * speed;
+
+        if(vel.x < 0 && faceRight) FlipSprite();
+        if(vel.x > 0 && !faceRight) FlipSprite();
 
         rb.velocity = vel;
 
@@ -39,5 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             MainManager.ExitInventory();
         }
+    }
+
+    private void FlipSprite()
+    {
+        faceRight = !faceRight;
+        spriteRenderer.flipX = !faceRight;
     }
 }
