@@ -5,17 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PartyAI : MonoBehaviour
 {
+    [SerializeField] string partyMember;
     [SerializeField] GameObject player;
     [SerializeField] float speed;
     [SerializeField] float distance;
 
     bool team = false;
+    bool faceRight = true;
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         team = false;
     }
 
@@ -41,6 +45,10 @@ public class PartyAI : MonoBehaviour
             }
 
             vel = dir * speed;
+
+            if (vel.x < 0 && faceRight) FlipSprite();
+            if (vel.x > 0 && !faceRight) FlipSprite();
+
             rb.velocity = vel;
         }
     }
@@ -51,6 +59,12 @@ public class PartyAI : MonoBehaviour
         {
             team = true;
             MainManager.partySize++;
+            MainManager.partyMembers.Add(partyMember);
         }
+    }
+    private void FlipSprite()
+    {
+        faceRight = !faceRight;
+        spriteRenderer.flipX = !faceRight;
     }
 }

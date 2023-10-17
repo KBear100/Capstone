@@ -2130,6 +2130,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 7811042346321800833}
+    - target: {fileID: 2321042842610462507, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: partyMember
+      value: Steel
+      objectReference: {fileID: 0}
     - target: {fileID: 2321042842610462508, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
       propertyPath: m_Name
       value: Steel
@@ -2137,6 +2141,18 @@ PrefabInstance:
     - target: {fileID: 2321042842610462510, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321042842610462510, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321042842610462510, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321042842610462510, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2321042842610462510, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2178,6 +2194,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2321042842610462510, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321042842610462511, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 93fc1c0ecdeed7b41a8b0ca9e054599c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
 --- !u!1 &267126484
@@ -3884,6 +3908,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 7811042346321800833}
+    - target: {fileID: 2321042842610462507, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: partyMember
+      value: Gracy
+      objectReference: {fileID: 0}
     - target: {fileID: 2321042842610462508, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
       propertyPath: m_Name
       value: Gracy
@@ -15207,6 +15235,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 7811042346321800833}
+    - target: {fileID: 2321042842610462507, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: partyMember
+      value: Stacy
+      objectReference: {fileID: 0}
     - target: {fileID: 2321042842610462508, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
       propertyPath: m_Name
       value: Stacy

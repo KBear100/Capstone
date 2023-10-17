@@ -1998,10 +1998,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1795844671}
-  party:
+  partyObjects:
   - {fileID: 2050980345}
   - {fileID: 1126386346}
   - {fileID: 1981153424}
+  partyAI:
+  - {fileID: 2050980348}
+  - {fileID: 0}
+  - {fileID: 0}
   enemy: {fileID: 627594441}
   fightText: {fileID: 491684924}
   wait: 3
@@ -2586,6 +2590,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1126386348}
+  - component: {fileID: 1126386349}
   - component: {fileID: 1126386347}
   m_Layer: 0
   m_Name: Party2
@@ -2661,6 +2666,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1126386349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126386346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c69bee00a8c3514a81c830c60fc5cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  member: Gracy
 --- !u!1 &1129266745
 GameObject:
   m_ObjectHideFlags: 0
@@ -4684,6 +4702,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1981153426}
+  - component: {fileID: 1981153427}
   - component: {fileID: 1981153425}
   m_Layer: 0
   m_Name: Party3
@@ -4759,6 +4778,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1981153427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981153424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c69bee00a8c3514a81c830c60fc5cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  member: Stacy
 --- !u!1 &1992391455
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,6 +4983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2050980347}
+  - component: {fileID: 2050980348}
   - component: {fileID: 2050980346}
   m_Layer: 0
   m_Name: Party1
@@ -5000,7 +5033,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93fc1c0ecdeed7b41a8b0ca9e054599c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5019,13 +5052,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050980345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 1.03, z: 0}
+  m_LocalPosition: {x: -3, y: 1.4, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2050980348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050980345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c69bee00a8c3514a81c830c60fc5cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  member: Steel
 --- !u!1 &2066751213
 GameObject:
   m_ObjectHideFlags: 0

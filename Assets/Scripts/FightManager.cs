@@ -7,9 +7,14 @@ using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
 {
+    [Header("Player")]
     [SerializeField] FightPlayer player;
-    [SerializeField] GameObject[] party;
+    [Header("Party")]
+    [SerializeField] GameObject[] partyObjects;
+    [SerializeField] PartyFightAI[] partyAI;
+    [Header("Enemy")]
     [SerializeField] AttackingEnemy enemy;
+    [Header("UI")]
     [SerializeField] TMP_Text fightText;
     [SerializeField] float wait;
     [SerializeField] Slider playerHealthUI;
@@ -26,10 +31,9 @@ public class FightManager : MonoBehaviour
         enemyHealthUI.maxValue = enemy.health;
         playerHealthUI.value = MainManager.playerHealth;
 
-        for (int i = 0; i < MainManager.partySize; i++)
-        {
-            party[i].SetActive(true);
-        }
+        if (MainManager.partyMembers.Contains("Steel")) partyObjects[0].SetActive(true);
+        if (MainManager.partyMembers.Contains("Gracy")) partyObjects[1].SetActive(true);
+        if (MainManager.partyMembers.Contains("Stacy")) partyObjects[2].SetActive(true);
     }
 
     void Update()
@@ -76,6 +80,10 @@ public class FightManager : MonoBehaviour
             }
             timer = wait;
             enemy.incomingDamage = 1;
+        }
+        else if(MainManager.partySize > 0)
+        {
+            
         }
         else
         {
