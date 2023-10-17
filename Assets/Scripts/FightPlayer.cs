@@ -6,9 +6,6 @@ using static UnityEditor.Progress;
 
 public class FightPlayer : MonoBehaviour
 {
-    [Header("Enemy")]
-    [SerializeField] GameObject enemy;
-
     [HideInInspector] public bool turn = true;
     [HideInInspector] public string action;
     [HideInInspector] public float damage;

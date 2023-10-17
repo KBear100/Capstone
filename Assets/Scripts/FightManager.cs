@@ -10,7 +10,6 @@ public class FightManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] FightPlayer player;
     [Header("Party")]
-    [SerializeField] GameObject[] partyObjects;
     [SerializeField] PartyFightAI[] partyAI;
     [Header("Enemy")]
     [SerializeField] AttackingEnemy enemy;
@@ -31,66 +30,87 @@ public class FightManager : MonoBehaviour
         enemyHealthUI.maxValue = enemy.health;
         playerHealthUI.value = MainManager.playerHealth;
 
-        if (MainManager.partyMembers.Contains("Steel")) partyObjects[0].SetActive(true);
-        if (MainManager.partyMembers.Contains("Gracy")) partyObjects[1].SetActive(true);
-        if (MainManager.partyMembers.Contains("Stacy")) partyObjects[2].SetActive(true);
+        if (MainManager.partyMembers.Contains("Steel")) partyAI[0].gameObject.SetActive(true);
+        if (MainManager.partyMembers.Contains("Gracy")) partyAI[1].gameObject.SetActive(true);
+        if (MainManager.partyMembers.Contains("Stacy")) partyAI[2].gameObject.SetActive(true);
     }
 
     void Update()
     {
         playerHealthUI.value = MainManager.playerHealth;
         enemyHealthUI.value = enemy.health;
-        
-        if(player.turn)
+
+        if (enemy.health <= 0)
         {
-            if (player.action == "Attack")
-            {
-                fightText.text = "Enemy Took " + player.damage * enemy.incomingDamage + " Damage.";
-                enemy.health -= player.damage;
-                if (enemy.health <= 0)
-                {
-                    fightText.text = "Enemy Defeated! You gain " + enemy.gold + " gold.";
+            fightText.text = "Enemy Defeated! You gain " + enemy.gold + " gold.";
 
-                    doneTimer -= Time.deltaTime;
-                    if(doneTimer <= 0)
-                    {
-                        MainManager.gold += enemy.gold;
-                        SceneManager.UnloadSceneAsync("Fight1");
-                    }
-                }
-                else
-                {
-                    player.action = "";
-                    player.turn = false;
-                }
-            }
-            else if (player.action == "Defend")
+            doneTimer -= Time.deltaTime;
+            if (doneTimer <= 0)
             {
-                fightText.text = "Player Defended";
-
-                player.action = "";
-                player.turn = false;
+                MainManager.gold += enemy.gold;
+                SceneManager.UnloadSceneAsync("Fight1");
             }
-            else if (player.action == "Item")
-            {
-                fightText.text = "Player Used an Item";
-
-                player.action = "";
-                player.turn = false;
-            }
-            timer = wait;
-            enemy.incomingDamage = 1;
         }
-        else if(MainManager.partySize > 0)
+
+        //Player
+        if (player.turn)
         {
-            
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                fightText.text = "Meeri's Turn";
+                PlayerTurn(player.action);
+            }
         }
+        //Steel
+        else if (partyAI[0].turn)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                fightText.text = "Steel's Turn";
+                PartyTurn(partyAI[0], partyAI[0].action);
+            }
+        }
+        //Gracy
+        else if (partyAI[1].turn)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                fightText.text = "Gracy's Turn";
+                PartyTurn(partyAI[1], partyAI[1].action);
+            }
+        }
+        //Stacy
+        else if (partyAI[2].turn)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                fightText.text = "Stacy's turn";
+                PartyTurn(partyAI[2], partyAI[2].action);
+            }
+        }
+        //Enemy
         else
         {
+            if (MainManager.playerHealth <= 0)
+            {
+                fightText.text = "You Lose";
+                return;
+            }
+
+            enemy.incomingDamage = 1;
             timer -= Time.deltaTime;
 
             if(timer <= 0)
             {
+
                 enemy.Turn();
                 if(enemy.turn == 1)
                 {
@@ -106,9 +126,81 @@ public class FightManager : MonoBehaviour
                 enemy.turn = 0;
                 player.incomingDamage = 1;
 
-                if (MainManager.playerHealth <= 0) fightText.text = "You Lose";
-                else player.turn = true;
+                player.turn = true;
+                foreach(PartyFightAI party in partyAI)
+                {
+                    if (party.gameObject.activeInHierarchy) party.turn = true;
+                }
+                timer = wait;
             }
+        }
+    }
+
+    public void PlayerTurn(string action)
+    {
+        //Attack
+        if (action == "Attack")
+        {
+            fightText.text = "Enemy Took " + player.damage * enemy.incomingDamage + " Damage.";
+            enemy.health -= player.damage;
+
+            Clear();
+            player.turn = false;
+        }
+        //Defend
+        else if (action == "Defend")
+        {
+            fightText.text = "Player Defended";
+
+            Clear();
+            player.turn = false;
+        }
+        //Item
+        else if (action == "Item")
+        {
+            fightText.text = "Player Used an Item";
+
+            Clear();
+            player.turn = false;
+        }
+    }
+
+    public void PartyTurn(PartyFightAI member, string action)
+    {
+        //Attack
+        if (action == "Attack")
+        {
+            fightText.text = "Enemy Took " + member.damage * enemy.incomingDamage + " Damage.";
+            enemy.health -= member.damage;
+
+            Clear();
+            member.turn = false;
+        }
+        //Defend
+        else if (action == "Defend")
+        {
+            fightText.text = member.member + " Defended";
+
+            Clear();
+            member.turn = false;
+        }
+        //Item
+        else if (action == "Item")
+        {
+            fightText.text = member.member + " Used an Item";
+
+            Clear();
+            member.turn = false;
+        }
+    }
+
+    public void Clear()
+    {
+        player.action = "";
+        foreach(PartyFightAI party in partyAI)
+        {
+            party.action = "";
+            timer = wait;
         }
     }
 }

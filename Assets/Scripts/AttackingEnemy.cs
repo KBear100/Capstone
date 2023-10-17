@@ -24,17 +24,17 @@ public class AttackingEnemy : MonoBehaviour
             case "Zombie":
                 spriteRenderer.sprite = sprites[0];
                 maxDamage = 6;
-                health = 10;
+                health = 15;
                 break;
             case "Ninja":
                 spriteRenderer.sprite = sprites[1];
-                maxDamage = 9;
-                health = 15;
+                maxDamage = 11;
+                health = 20;
                 break;
             case "Sniper":
                 spriteRenderer.sprite = sprites[2];
-                maxDamage = 11;
-                health = 20;
+                maxDamage = 16;
+                health = 30;
                 break;
         }
 

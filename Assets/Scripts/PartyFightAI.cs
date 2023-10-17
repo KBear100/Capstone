@@ -4,20 +4,43 @@ using UnityEngine;
 
 public class PartyFightAI : MonoBehaviour
 {
-    [SerializeField] string member;
+    [SerializeField] public string member;
 
-    bool turn = false;
+    [HideInInspector] public bool turn = false;
+    [HideInInspector] public string action;
+    [HideInInspector] public float damage;
+    [HideInInspector] public float incomingDamage;
 
     void Start()
     {
-        turn = false;
+        if (this.gameObject.activeInHierarchy) turn = true;
     }
 
     void Update()
     {
-        if (turn)
+        if (MainManager.inventory.usedItem)
         {
-
+            action = "Item";
+            MainManager.inventory.usedItem = false;
+            MainManager.ExitInventory();
         }
+    }
+
+    public void Attack()
+    {
+        damage = Random.Range(1, 6);
+        action = "Attack";
+    }
+
+    public void Defend()
+    {
+        incomingDamage = 0.5f;
+        action = "Defend";
+    }
+
+    public void Item()
+    {
+        MainManager.inventory.Display();
+        MainManager.inventoryUI.SetActive(true);
     }
 }
