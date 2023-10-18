@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         if(vel.x < 0 && faceRight) FlipSprite();
         if(vel.x > 0 && !faceRight) FlipSprite();
 
+        if (MainManager.fight) vel = Vector2.zero;
         rb.velocity = vel;
 
         if(Input.GetKeyDown(KeyCode.I))

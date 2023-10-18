@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
     public static GameObject inventoryUI;
     public static float gold = 100;
     public static float playerHealth = 100;
+    public static bool fight = false;
     public static float weaponMod = 0;
     public static int partySize = 0;
     public static List<string> partyMembers = new List<string>();
