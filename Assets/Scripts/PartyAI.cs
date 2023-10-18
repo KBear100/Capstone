@@ -6,6 +6,7 @@ using UnityEngine;
 public class PartyAI : MonoBehaviour
 {
     [SerializeField] string partyMember;
+    [SerializeField] GameObject silver;
     [SerializeField] GameObject player;
     [SerializeField] float speed;
     [SerializeField] float distance;
@@ -69,6 +70,7 @@ public class PartyAI : MonoBehaviour
             team = true;
             MainManager.partySize++;
             MainManager.partyMembers.Add(partyMember);
+            if (partyMember == "Steel") Destroy(silver);
         }
     }
 
