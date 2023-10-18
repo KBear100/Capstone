@@ -20,6 +20,7 @@ public class PartyAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        Physics2D.IgnoreCollision(player.gameObject.GetComponent<Collider2D>(), GetComponent<CapsuleCollider2D>());
         team = false;
     }
 
@@ -53,6 +54,14 @@ public class PartyAI : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && !team)
@@ -62,6 +71,7 @@ public class PartyAI : MonoBehaviour
             MainManager.partyMembers.Add(partyMember);
         }
     }
+
     private void FlipSprite()
     {
         faceRight = !faceRight;
