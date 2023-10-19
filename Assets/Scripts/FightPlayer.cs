@@ -18,7 +18,7 @@ public class FightPlayer : MonoBehaviour
 
     void Update()
     {
-        if (MainManager.inventory.usedItem)
+        if (MainManager.inventory.usedItem && turn)
         {
             action = "Item";
             MainManager.inventory.usedItem = false;

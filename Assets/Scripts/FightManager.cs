@@ -180,7 +180,7 @@ public class FightManager : MonoBehaviour
         //Defend
         else if (action == "Defend")
         {
-            fightText.text = "Player Defended";
+            fightText.text = "Meeri Defended";
 
             Clear();
             player.turn = false;
@@ -188,7 +188,7 @@ public class FightManager : MonoBehaviour
         //Item
         else if (action == "Item")
         {
-            fightText.text = "Player Used an Item";
+            fightText.text = "Meeri Used an Item";
 
             Clear();
             player.turn = false;

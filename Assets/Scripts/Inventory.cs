@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] TMP_Text equipmentText;
     [SerializeField] Sprite[] sprites;
     [SerializeField] Image[] images;
+    [SerializeField] GameObject[] partyButtons;
     [SerializeField] Image weaponImage;
     [SerializeField] public int maxItems = 8;
 
@@ -97,9 +98,14 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            if (item.text == "Potion") MainManager.playerHealth += 10;
+            if (item.text == "Potion")
+            {
+                partyButtons[0].SetActive(true);
+                if (MainManager.partyMembers.Contains("Steel")) partyButtons[1].SetActive(true);
+                if (MainManager.partyMembers.Contains("Gracy")) partyButtons[2].SetActive(true);
+                if (MainManager.partyMembers.Contains("Stacy")) partyButtons[3].SetActive(true);
+            }
             itemUsed = item.text;
-            usedItem = true;
 
             RemoveItem(item, useImage);
         }
@@ -122,5 +128,17 @@ public class Inventory : MonoBehaviour
         items.Remove(item.text);
         item.text = "";
         image.sprite = null;
+    }
+
+    public void UseOnParty(TMP_Text player)
+    {
+        if (player.text == "Meeri") MainManager.playerHealth += 10;
+        if (player.text == "Steel") MainManager.steelHealth += 10;
+        if (player.text == "Gracy") MainManager.gracyHealth += 10;
+        if (player.text == "Stacy") MainManager.stacyHealth += 10;
+
+        usedItem = true;
+
+        foreach (var button in partyButtons) button.SetActive(false);
     }
 }
