@@ -25,16 +25,19 @@ public class AttackingEnemy : MonoBehaviour
                 spriteRenderer.sprite = sprites[0];
                 maxDamage = 6;
                 health = 15;
+                gold = 3;
                 break;
             case "Ninja":
                 spriteRenderer.sprite = sprites[1];
                 maxDamage = 11;
                 health = 20;
+                gold = 5;
                 break;
             case "Sniper":
                 spriteRenderer.sprite = sprites[2];
                 maxDamage = 16;
                 health = 30;
+                gold = 7;
                 break;
         }
 
@@ -57,6 +60,19 @@ public class AttackingEnemy : MonoBehaviour
             case 2:
                 incomingDamage = 0.5f;
                 break;
+        }
+    }
+
+    public string RandomAttack()
+    {
+        int rand = Random.Range(1, 5);
+        if (rand == 1) return "Player";
+        else if (rand == 2 && MainManager.partyMembers.Contains("Steel")) return "Steel";
+        else if (rand == 3 && MainManager.partyMembers.Contains("Gracy")) return "Gracy";
+        else if (rand == 4 && MainManager.partyMembers.Contains("Stacy")) return "Stacy";
+        else
+        {
+            return "Player";
         }
     }
 }

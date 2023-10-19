@@ -15,9 +15,13 @@ public class FightManager : MonoBehaviour
     [SerializeField] AttackingEnemy enemy;
     [Header("UI")]
     [SerializeField] TMP_Text fightText;
-    [SerializeField] float wait;
     [SerializeField] Slider playerHealthUI;
+    [SerializeField] Slider steelHealthUI;
+    [SerializeField] Slider gracyHealthUI;
+    [SerializeField] Slider stacyHealthUI;
     [SerializeField] Slider enemyHealthUI;
+    [SerializeField] TMP_Text enemyName;
+    [SerializeField] float wait;
 
     float timer;
     float doneTimer;
@@ -25,19 +29,36 @@ public class FightManager : MonoBehaviour
     void Start()
     {
         fightText.text = "A " + enemy.type + " Approaches. Prepare to Fight!";
+        enemyName.text = enemy.type;
+
         timer = wait;
         doneTimer = wait;
         enemyHealthUI.maxValue = enemy.health;
         playerHealthUI.value = MainManager.playerHealth;
 
-        if (MainManager.partyMembers.Contains("Steel")) partyAI[0].gameObject.SetActive(true);
-        if (MainManager.partyMembers.Contains("Gracy")) partyAI[1].gameObject.SetActive(true);
-        if (MainManager.partyMembers.Contains("Stacy")) partyAI[2].gameObject.SetActive(true);
+        if (MainManager.partyMembers.Contains("Steel"))
+        {
+            partyAI[0].gameObject.SetActive(true);
+            steelHealthUI.gameObject.SetActive(true);
+        }
+        if (MainManager.partyMembers.Contains("Gracy"))
+        {
+            partyAI[1].gameObject.SetActive(true);
+            gracyHealthUI.gameObject.SetActive(true);
+        }
+        if (MainManager.partyMembers.Contains("Stacy"))
+        {
+            partyAI[2].gameObject.SetActive(true);
+            stacyHealthUI.gameObject.SetActive(true);
+        }
     }
 
     void Update()
     {
         playerHealthUI.value = MainManager.playerHealth;
+        steelHealthUI.value = MainManager.steelHealth;
+        gracyHealthUI.value = MainManager.gracyHealth;
+        stacyHealthUI.value = MainManager.stacyHealth;
         enemyHealthUI.value = enemy.health;
 
         if (enemy.health <= 0)
@@ -56,6 +77,7 @@ public class FightManager : MonoBehaviour
         //Player
         if (player.turn)
         {
+            player.incomingDamage = 1;
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -67,6 +89,7 @@ public class FightManager : MonoBehaviour
         //Steel
         else if (partyAI[0].turn)
         {
+            partyAI[0].incomingDamage = 1;
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -78,6 +101,7 @@ public class FightManager : MonoBehaviour
         //Gracy
         else if (partyAI[1].turn)
         {
+            partyAI[1].incomingDamage = 1;
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -89,6 +113,7 @@ public class FightManager : MonoBehaviour
         //Stacy
         else if (partyAI[2].turn)
         {
+            partyAI[2].incomingDamage = 1;
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -111,14 +136,18 @@ public class FightManager : MonoBehaviour
 
             if(timer <= 0)
             {
-
                 enemy.Turn();
                 if(enemy.turn == 1)
                 {
                     float damage = enemy.damage * player.incomingDamage;
+                    string attacked = enemy.RandomAttack();
 
-                    fightText.text = "Player Took " + damage + " Damage!";
-                    MainManager.playerHealth -= damage;
+                    if(attacked == "Player") MainManager.playerHealth -= damage;
+                    if(attacked == "Steel") MainManager.steelHealth -= damage;
+                    if(attacked == "Gracy") MainManager.gracyHealth -= damage;
+                    if(attacked == "Stacy") MainManager.stacyHealth -= damage;
+
+                    fightText.text = attacked + " Took " + damage + " Damage!";
                 }
                 else if(enemy.turn == 2)
                 {

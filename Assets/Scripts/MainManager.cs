@@ -12,6 +12,9 @@ public class MainManager : MonoBehaviour
     public static GameObject inventoryUI;
     public static float gold = 100;
     public static float playerHealth = 100;
+    public static float steelHealth = 100;
+    public static float gracyHealth = 100;
+    public static float stacyHealth = 100;
     public static bool fight = false;
     public static float weaponMod = 0;
     public static int partySize = 0;
@@ -46,6 +49,9 @@ public class MainManager : MonoBehaviour
     public void Update()
     {
         if (playerHealth > maxHealth) playerHealth = maxHealth;
+        if (steelHealth > maxHealth) steelHealth = maxHealth;
+        if (gracyHealth > maxHealth) gracyHealth = maxHealth;
+        if (stacyHealth > maxHealth) stacyHealth = maxHealth;
     }
 
     public static void ExitInventory()
