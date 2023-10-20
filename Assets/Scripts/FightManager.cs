@@ -69,7 +69,7 @@ public class FightManager : MonoBehaviour
             if (doneTimer <= 0)
             {
                 MainManager.gold += enemy.gold;
-                MainManager.fight = false;
+                MainManager.freezePlayer = false;
                 SceneManager.UnloadSceneAsync("Fight1");
             }
         }

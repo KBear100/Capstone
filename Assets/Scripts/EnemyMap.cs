@@ -94,7 +94,7 @@ public class EnemyMap : MonoBehaviour
         if (collision.tag == "Player")
         {
             SceneManager.LoadSceneAsync("Fight1", LoadSceneMode.Additive);
-            MainManager.fight = true;
+            MainManager.freezePlayer = true;
             state = State.FIGHT;
         }
     }

@@ -7,15 +7,17 @@ public class MainManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] GameObject invUI;
     [SerializeField] Inventory inv;
+    [SerializeField] DialogSystem ds;
 
     public static Inventory inventory;
     public static GameObject inventoryUI;
+    public static DialogSystem dialogSystem;
     public static float gold = 100;
     public static float playerHealth = 100;
     public static float steelHealth = 100;
     public static float gracyHealth = 100;
     public static float stacyHealth = 100;
-    public static bool fight = false;
+    public static bool freezePlayer = false;
     public static float weaponMod = 0;
     public static int partySize = 0;
     public static List<string> partyMembers = new List<string>();
@@ -41,6 +43,8 @@ public class MainManager : MonoBehaviour
         {
             inventory = inv;
         }
+
+        if (dialogSystem == null) dialogSystem = ds;
 
         instance = this;
         DontDestroyOnLoad(gameObject);
