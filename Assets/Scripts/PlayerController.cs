@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         if (MainManager.freezePlayer) vel = Vector2.zero;
         rb.velocity = vel;
 
-        //if (Input.GetKeyDown(KeyCode.E)) MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.steelDialog.dialog[0]);
+        
 
         if(Input.GetKeyDown(KeyCode.I))
         {
@@ -54,5 +54,18 @@ public class PlayerController : MonoBehaviour
     {
         faceRight = !faceRight;
         spriteRenderer.flipX = !faceRight;
+    }
+
+    public void TalkToSteel()
+    {
+
+    }
+    public void TalkToGracy()
+    {
+
+    }
+    public void TalkToStacy()
+    {
+
     }
 }
