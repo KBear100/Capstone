@@ -5,12 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PartyAI : MonoBehaviour
 {
+    [Header("Party")]
     [SerializeField] string partyMember;
     [SerializeField] GameObject silver;
     [SerializeField] GameObject player;
     [SerializeField] float speed;
     [SerializeField] float distance;
     [SerializeField] float dialogTimer;
+    [Header("Animation")]
+    [SerializeField] Animator animator;
 
     bool team = false;
     bool faceRight = true;
@@ -59,6 +62,9 @@ public class PartyAI : MonoBehaviour
 
             if (vel.x < 0 && faceRight) FlipSprite();
             if (vel.x > 0 && !faceRight) FlipSprite();
+
+            if (vel.x != 0 || vel.y != 0) animator.SetFloat("Speed", 1);
+            else animator.SetFloat("Speed", 0);
 
             rb.velocity = vel;
         }

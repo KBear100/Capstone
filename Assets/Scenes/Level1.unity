@@ -2353,6 +2353,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22532615}
     - target: {fileID: 2321042842610462507, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 260095428}
+    - target: {fileID: 2321042842610462507, guid: b17389403349d2b4a861ed02eeed2d96, type: 3}
       propertyPath: dialogTimer
       value: 3
       objectReference: {fileID: 0}

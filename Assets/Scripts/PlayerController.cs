@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
         if (MainManager.freezePlayer) vel = Vector2.zero;
 
-        if (vel.x > 0 || vel.y > 0) animator.SetFloat("Speed", 1);
+        if (vel.x != 0 || vel.y != 0) animator.SetFloat("Speed", 1);
         else animator.SetFloat("Speed", 0);
         rb.velocity = vel;
 
