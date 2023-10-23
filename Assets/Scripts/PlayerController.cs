@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float speed;
+    [Header("Anmation")]
+    [SerializeField] Animator animator;
 
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
@@ -28,6 +31,9 @@ public class PlayerController : MonoBehaviour
         if(vel.x > 0 && !faceRight) FlipSprite();
 
         if (MainManager.freezePlayer) vel = Vector2.zero;
+
+        if (vel.x > 0 || vel.y > 0) animator.SetFloat("Speed", 1);
+        else animator.SetFloat("Speed", 0);
         rb.velocity = vel;
 
         

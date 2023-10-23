@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a8652bdff139bd14481ce100e4209e4e
+guid: 89f27780b4651bc47bd261c9a03c3a55
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_0
+      name: SteelWalking-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 100
-        height: 200
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1482c468a3153541901b433c0115746
-      internalID: -1211644597
+      spriteID: da29ec10965ebf0459ef8e85c51a3621
+      internalID: -978742931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_1
+      name: SteelWalking-Sheet_1
       rect:
         serializedVersion: 2
         x: 100
         y: 0
         width: 100
-        height: 200
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d14fc96ca79a374298fad42381b2406
-      internalID: -536082287
+      spriteID: e6636a6a6f01d724e81082a41b1ec3a4
+      internalID: 2075202087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_2
+      name: SteelWalking-Sheet_2
       rect:
         serializedVersion: 2
         x: 200
         y: 0
         width: 100
-        height: 200
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba9e7d18ee0c4e74dbc2c3f9c991539c
-      internalID: 1963226284
+      spriteID: 073ea109f44e00c48aa5b545c85ae5a6
+      internalID: -653916909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_3
+      name: SteelWalking-Sheet_3
       rect:
         serializedVersion: 2
         x: 300
         y: 0
         width: 100
-        height: 200
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,71 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06bf8404a32edf9489cc734e8ca6cd35
-      internalID: -1032742966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MeeriWalk-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 0
-        width: 100
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90a75d6ae8802214cb4a0c939f5c4203
-      internalID: -1861056418
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MeeriWalk-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3cebef2dc3ca4bf41a3636f4ee7e3889
-      internalID: -1769745592
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MeeriWalk-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 100
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 661271557d3541f41958578123c2a569
-      internalID: 803300886
+      spriteID: 996ff21b6107ea14eaeed70b446c30a2
+      internalID: -1709087359
       vertices: []
       indices: 
       edges: []
@@ -262,13 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MeeriWalk-Sheet_0: -1211644597
-      MeeriWalk-Sheet_1: -536082287
-      MeeriWalk-Sheet_2: 1963226284
-      MeeriWalk-Sheet_3: -1032742966
-      MeeriWalk-Sheet_4: -1861056418
-      MeeriWalk-Sheet_5: -1769745592
-      MeeriWalk-Sheet_6: 803300886
+      SteelWalking-Sheet_0: -978742931
+      SteelWalking-Sheet_1: 2075202087
+      SteelWalking-Sheet_2: -653916909
+      SteelWalking-Sheet_3: -1709087359
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

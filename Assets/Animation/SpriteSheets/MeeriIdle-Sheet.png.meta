@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a8652bdff139bd14481ce100e4209e4e
+guid: 95763b843ce7b65489029e15039ed4ad
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_0
+      name: MeeriIdle-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1482c468a3153541901b433c0115746
-      internalID: -1211644597
+      spriteID: 6b96b9b98dec80445b693535ba880daf
+      internalID: 1509723252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_1
+      name: MeeriIdle-Sheet_1
       rect:
         serializedVersion: 2
         x: 100
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d14fc96ca79a374298fad42381b2406
-      internalID: -536082287
+      spriteID: f3be679187e8a1746a884e2dbc8d0b06
+      internalID: -1384230370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_2
+      name: MeeriIdle-Sheet_2
       rect:
         serializedVersion: 2
         x: 200
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba9e7d18ee0c4e74dbc2c3f9c991539c
-      internalID: 1963226284
+      spriteID: c314742566063b546b92ffd913504258
+      internalID: 1137233653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_3
+      name: MeeriIdle-Sheet_3
       rect:
         serializedVersion: 2
         x: 300
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06bf8404a32edf9489cc734e8ca6cd35
-      internalID: -1032742966
+      spriteID: d540f4091ef31bc4a8ddc7df9a852126
+      internalID: -1239115677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_4
+      name: MeeriIdle-Sheet_4
       rect:
         serializedVersion: 2
         x: 400
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90a75d6ae8802214cb4a0c939f5c4203
-      internalID: -1861056418
+      spriteID: 4d7007c6307c3a247a4fc27a9a9fdcde
+      internalID: 145723557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_5
+      name: MeeriIdle-Sheet_5
       rect:
         serializedVersion: 2
         x: 500
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cebef2dc3ca4bf41a3636f4ee7e3889
-      internalID: -1769745592
+      spriteID: 664c8199694b9d14aba20cffee93cb7d
+      internalID: 1566945940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MeeriWalk-Sheet_6
+      name: MeeriIdle-Sheet_6
       rect:
         serializedVersion: 2
         x: 600
@@ -245,8 +245,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 661271557d3541f41958578123c2a569
-      internalID: 803300886
+      spriteID: 49753fd85167fce4e8a1f4f1a59e6b76
+      internalID: 1583623661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeeriIdle-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8e4f712e47ddbd49b8d9ca95fb36456
+      internalID: -1832912040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeeriIdle-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a280ca2317811964295ce45d89dd860c
+      internalID: 708103417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeeriIdle-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f265ea9eaf79b254e9ff8da565363a00
+      internalID: -2037720503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeeriIdle-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84db8e5267968bd48a3e330543046465
+      internalID: 1462279970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeeriIdle-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf245a999b847840a2c01ae839ef7c5
+      internalID: 1989320670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeeriIdle-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ecf14e970f0ff74daf2688dedc9774b
+      internalID: -1781448646
       vertices: []
       indices: 
       edges: []
@@ -262,13 +388,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MeeriWalk-Sheet_0: -1211644597
-      MeeriWalk-Sheet_1: -536082287
-      MeeriWalk-Sheet_2: 1963226284
-      MeeriWalk-Sheet_3: -1032742966
-      MeeriWalk-Sheet_4: -1861056418
-      MeeriWalk-Sheet_5: -1769745592
-      MeeriWalk-Sheet_6: 803300886
+      MeeriIdle-Sheet_0: 1509723252
+      MeeriIdle-Sheet_1: -1384230370
+      MeeriIdle-Sheet_10: 1462279970
+      MeeriIdle-Sheet_11: 1989320670
+      MeeriIdle-Sheet_12: -1781448646
+      MeeriIdle-Sheet_2: 1137233653
+      MeeriIdle-Sheet_3: -1239115677
+      MeeriIdle-Sheet_4: 145723557
+      MeeriIdle-Sheet_5: 1566945940
+      MeeriIdle-Sheet_6: 1583623661
+      MeeriIdle-Sheet_7: -1832912040
+      MeeriIdle-Sheet_8: 708103417
+      MeeriIdle-Sheet_9: -2037720503
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
