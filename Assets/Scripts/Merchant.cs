@@ -14,6 +14,7 @@ public class Merchant : MonoBehaviour
     [SerializeField] TMP_Text goldText;
     [SerializeField] TMP_Text shoppingText;
     [SerializeField] Inventory inventory;
+    [SerializeField] AudioSource coins;
 
     private string item;
 
@@ -58,6 +59,7 @@ public class Merchant : MonoBehaviour
         {
             Add(item);
             MainManager.gold -= cost;
+            coins.Play();
         }
     }
 
