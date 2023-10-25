@@ -9,6 +9,8 @@ public class FightManager : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] FightPlayer player;
+    [Header("Sounds")]
+    [SerializeField] AudioSource swordSwing;
     [Header("Party")]
     [SerializeField] PartyFightAI[] partyAI;
     [Header("Enemy")]
@@ -173,6 +175,7 @@ public class FightManager : MonoBehaviour
         {
             fightText.text = "Enemy Took " + player.damage * enemy.incomingDamage + " Damage.";
             enemy.health -= player.damage;
+            swordSwing.Play();
 
             Clear();
             player.turn = false;
@@ -202,6 +205,7 @@ public class FightManager : MonoBehaviour
         {
             fightText.text = "Enemy Took " + member.damage * enemy.incomingDamage + " Damage.";
             enemy.health -= member.damage;
+            swordSwing.Play();
 
             Clear();
             member.turn = false;
