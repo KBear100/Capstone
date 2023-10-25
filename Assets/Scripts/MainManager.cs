@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
-    [Header("Player")]
     [SerializeField] GameObject invUI;
     [SerializeField] Inventory inv;
     [SerializeField] DialogSystem ds;

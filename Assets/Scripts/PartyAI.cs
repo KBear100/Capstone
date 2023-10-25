@@ -89,6 +89,45 @@ public class PartyAI : MonoBehaviour
                 stacyIntro = true;
             }
         }
+
+        if(collision.tag == "Player")
+        {
+            if (partyMember == "Steel")
+            {
+                player.GetComponent<PlayerController>().steelTalk = true;
+            }
+
+            if (partyMember == "Gracy")
+            {
+                player.GetComponent<PlayerController>().gracyTalk = true;
+            }
+
+            if (partyMember == "Stacy")
+            {
+                player.GetComponent<PlayerController>().stacyTalk = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            if (partyMember == "Steel")
+            {
+                player.GetComponent<PlayerController>().steelTalk = false;
+            }
+
+            if (partyMember == "Gracy")
+            {
+                player.GetComponent<PlayerController>().gracyTalk = false;
+            }
+
+            if (partyMember == "Stacy")
+            {
+                player.GetComponent<PlayerController>().stacyTalk = false;
+            }
+        }
     }
 
     private void FlipSprite()

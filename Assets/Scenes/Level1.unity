@@ -3987,7 +3987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17080,6 +17080,10 @@ PrefabInstance:
       propertyPath: footstep
       value: 
       objectReference: {fileID: 7811042346321800844}
+    - target: {fileID: 2779986007520326365, guid: f80c51e52f040eb4980fce1cb7d171b7, type: 3}
+      propertyPath: dialogTimer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5406672048537006459, guid: f80c51e52f040eb4980fce1cb7d171b7, type: 3}
       propertyPath: m_Name
       value: Player
