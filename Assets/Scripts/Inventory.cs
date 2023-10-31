@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] TMP_Text weaponText;
     [SerializeField] TMP_Text equipmentText;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] Sprite defaultBackground;
     [SerializeField] Image[] images;
     [SerializeField] GameObject[] partyButtons;
     [SerializeField] Image weaponImage;
@@ -56,7 +57,7 @@ public class Inventory : MonoBehaviour
     public void Clear()
     {
         foreach (var item in itemsText) item.text = "";
-        foreach (var image in images) image.sprite = null;
+        foreach (var image in images) image.sprite = defaultBackground;
         usedItem = false;
         itemUsed = "";
     }
@@ -127,7 +128,7 @@ public class Inventory : MonoBehaviour
         if (numItems > 0) numItems--;
         items.Remove(item.text);
         item.text = "";
-        image.sprite = null;
+        image.sprite = defaultBackground;
     }
 
     public void UseOnParty(TMP_Text player)

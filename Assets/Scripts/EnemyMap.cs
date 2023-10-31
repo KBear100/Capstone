@@ -74,6 +74,8 @@ public class EnemyMap : MonoBehaviour
                 break;
         }
 
+        if (MainManager.pause) dir = Vector2.zero;
+
         vel = dir * speed;
         rb.velocity = vel;
     }
@@ -94,7 +96,7 @@ public class EnemyMap : MonoBehaviour
         if (collision.tag == "Player")
         {
             SceneManager.LoadSceneAsync("Fight1", LoadSceneMode.Additive);
-            MainManager.freezePlayer = true;
+            MainManager.pause = true;
             state = State.FIGHT;
         }
     }

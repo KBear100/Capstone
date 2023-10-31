@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour
         vel.x = Input.GetAxis("Horizontal") * speed;
         vel.y = Input.GetAxis("Vertical") * speed;
 
+        if (MainManager.pause) vel = Vector2.zero;
+
         if(vel.x < 0 && faceRight) FlipSprite();
         if(vel.x > 0 && !faceRight) FlipSprite();
-
-        if (MainManager.freezePlayer) vel = Vector2.zero;
 
         if (vel.x != 0 || vel.y != 0)
         {
@@ -67,7 +67,9 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            MainManager.ExitInventory();
+            if(MainManager.inventoryUI.activeInHierarchy) MainManager.ExitInventory();
+            else if(!MainManager.pause) MainManager.Pause();
+            else if(MainManager.pause) MainManager.Resume();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -107,18 +109,5 @@ public class PlayerController : MonoBehaviour
     {
         faceRight = !faceRight;
         spriteRenderer.flipX = !faceRight;
-    }
-
-    public void TalkToSteel()
-    {
-
-    }
-    public void TalkToGracy()
-    {
-
-    }
-    public void TalkToStacy()
-    {
-
     }
 }

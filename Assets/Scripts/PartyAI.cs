@@ -145,7 +145,7 @@ public class PartyAI : MonoBehaviour
 
     private void SteelIntro()
     {
-        MainManager.freezePlayer = true;
+        MainManager.pause = true;
         if(MainManager.dialogSystem.text.text == "") MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.steelDialog.dialog[0]);
         timer -= Time.deltaTime;
         if (timer <= 0 && MainManager.dialogSystem.text.text == MainManager.dialogSystem.steelDialog.dialog[1])
@@ -153,7 +153,7 @@ public class PartyAI : MonoBehaviour
             MainManager.dialogSystem.ExitDialog();
             Destroy(silver);
             JoinParty();
-            MainManager.freezePlayer = false;
+            MainManager.pause = false;
             timer = dialogTimer;
             steelIntro = false;
         }
@@ -166,7 +166,7 @@ public class PartyAI : MonoBehaviour
 
     private void GracyIntro()
     {
-        MainManager.freezePlayer = true;
+        MainManager.pause = true;
         if (MainManager.dialogSystem.text.text == "") MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.gracyDialog.dialog[0]);
         timer -= Time.deltaTime;
 
@@ -174,7 +174,7 @@ public class PartyAI : MonoBehaviour
         {
             MainManager.dialogSystem.ExitDialog();
             JoinParty();
-            MainManager.freezePlayer = false;
+            MainManager.pause = false;
             gracyIntro = false;
             timer = dialogTimer;
         }
@@ -182,7 +182,7 @@ public class PartyAI : MonoBehaviour
 
     private void StacyIntro()
     {
-        MainManager.freezePlayer = true;
+        MainManager.pause = true;
         if (MainManager.dialogSystem.text.text == "") MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.stacyDialog.dialog[0]);
         timer -= Time.deltaTime;
 
@@ -190,7 +190,7 @@ public class PartyAI : MonoBehaviour
         {
             MainManager.dialogSystem.ExitDialog();
             JoinParty();
-            MainManager.freezePlayer = false;
+            MainManager.pause = false;
             stacyIntro = false;
             timer = dialogTimer;
         }

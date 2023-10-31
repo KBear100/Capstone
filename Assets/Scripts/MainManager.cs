@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
     [SerializeField] GameObject invUI;
     [SerializeField] Inventory inv;
     [SerializeField] DialogSystem ds;
+    [SerializeField] GameObject ps;
 
     public static Inventory inventory;
     public static GameObject inventoryUI;
     public static DialogSystem dialogSystem;
+    public static GameObject pauseScreen;
     public static float gold = 100;
     public static float playerHealth = 100;
     public static float steelHealth = 100;
     public static float gracyHealth = 100;
     public static float stacyHealth = 100;
-    public static bool freezePlayer = false;
+    public static bool pause = false;
     public static float weaponMod = 0;
     public static int partySize = 0;
     public static List<string> partyMembers = new List<string>();
@@ -43,6 +46,11 @@ public class MainManager : MonoBehaviour
             inventory = inv;
         }
 
+        if(pauseScreen == null)
+        {
+            pauseScreen = ps;
+        }
+
         if (dialogSystem == null) dialogSystem = ds;
 
         instance = this;
@@ -61,5 +69,29 @@ public class MainManager : MonoBehaviour
     {
         inventoryUI.SetActive(false);
         inventory.Clear();
+    }
+
+    public static void Pause()
+    {
+        pause = true;
+        pauseScreen.SetActive(true);
+    }
+
+    public static void Resume()
+    {
+        pause = false;
+        pauseScreen.SetActive(false);
+    }
+
+    public void Title()
+    {
+        pause = false;
+        Destroy(gameObject);
+        SceneManager.LoadSceneAsync("Title", LoadSceneMode.Single);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

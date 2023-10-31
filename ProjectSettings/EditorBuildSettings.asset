@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fight1.unity
     guid: 52d37d4a4d738614386eac536f28fc9c
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 6a63251fe5322574c9f24e4dfe1e8e41
   m_configObjects: {}
