@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -14,15 +15,17 @@ public class Inventory : MonoBehaviour
     [SerializeField] Sprite defaultBackground;
     [SerializeField] Image[] images;
     [SerializeField] GameObject[] partyButtons;
+    [SerializeField] TMP_Text[] partyHealth;
     [SerializeField] Image weaponImage;
     [SerializeField] public int maxItems = 8;
+    [SerializeField] AudioSource cork;
 
     [Header("Stats")]
     public List<string> items = new List<string>();
     public int numItems = 0;
 
     [HideInInspector] public bool usedItem;
-    [HideInInspector] public string itemUsed;
+    [HideInInspector] public TMP_Text itemUsed;
 
     private Image useImage;
 
@@ -31,7 +34,7 @@ public class Inventory : MonoBehaviour
         foreach (var item in itemsText) item.text = "";
         weaponText.text = "Fist";
         usedItem = false;
-        itemUsed = "";
+        itemUsed = null;
         useImage = null;
     }
 
@@ -58,8 +61,11 @@ public class Inventory : MonoBehaviour
     {
         foreach (var item in itemsText) item.text = "";
         foreach (var image in images) image.sprite = defaultBackground;
+        foreach (var button in partyButtons) button.SetActive(false);
+        foreach (var health in partyHealth) health.gameObject.SetActive(false);
+        equipmentText.text = "Current Weapon";
         usedItem = false;
-        itemUsed = "";
+        itemUsed = null;
     }
 
     public void Display()
@@ -97,18 +103,32 @@ public class Inventory : MonoBehaviour
                 RemoveItem(item, useImage);
             }
         }
-        else
+        else if (item.text == "Potion")
         {
-            if (item.text == "Potion")
-            {
-                partyButtons[0].SetActive(true);
-                if (MainManager.partyMembers.Contains("Steel")) partyButtons[1].SetActive(true);
-                if (MainManager.partyMembers.Contains("Gracy")) partyButtons[2].SetActive(true);
-                if (MainManager.partyMembers.Contains("Stacy")) partyButtons[3].SetActive(true);
-            }
-            itemUsed = item.text;
+            partyButtons[0].SetActive(true);
+            partyHealth[0].gameObject.SetActive(true);
+            partyHealth[0].text = MainManager.playerHealth + "/100";
 
-            RemoveItem(item, useImage);
+            if (MainManager.partyMembers.Contains("Steel"))
+            {
+                partyButtons[1].SetActive(true);
+                partyHealth[1].gameObject.SetActive(true);
+                partyHealth[1].text = MainManager.steelHealth + "/100";
+            }
+            if (MainManager.partyMembers.Contains("Gracy"))
+            {
+                partyButtons[2].SetActive(true);
+                partyHealth[2].gameObject.SetActive(true);
+                partyHealth[2].text = MainManager.gracyHealth + "/100";
+            }
+            if (MainManager.partyMembers.Contains("Stacy"))
+            {
+                partyButtons[3].SetActive(true);
+                partyHealth[3].gameObject.SetActive(true);
+                partyHealth[3].text = MainManager.stacyHealth + "/100";
+            }
+
+            itemUsed = item;
         }
     }
 
@@ -138,8 +158,12 @@ public class Inventory : MonoBehaviour
         if (player.text == "Gracy") MainManager.gracyHealth += 10;
         if (player.text == "Stacy") MainManager.stacyHealth += 10;
 
+        cork.Play();
+
         usedItem = true;
+        RemoveItem(itemUsed, useImage);
 
         foreach (var button in partyButtons) button.SetActive(false);
+        foreach (var health in partyHealth) health.gameObject.SetActive(false);
     }
 }

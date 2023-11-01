@@ -17,7 +17,7 @@ public class MainManager : MonoBehaviour
     public static GameObject pauseScreen;
     public static AudioSource forestMusic;
     public static float gold = 100;
-    public static float playerHealth = 1;
+    public static float playerHealth = 100;
     public static float steelHealth = 100;
     public static float gracyHealth = 100;
     public static float stacyHealth = 100;
