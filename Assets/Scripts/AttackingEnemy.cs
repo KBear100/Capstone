@@ -66,13 +66,13 @@ public class AttackingEnemy : MonoBehaviour
     public string RandomAttack()
     {
         int rand = Random.Range(1, 5);
-        if (rand == 1) return "Player";
+        if (rand == 1) return "Meeri";
         else if (rand == 2 && MainManager.partyMembers.Contains("Steel")) return "Steel";
         else if (rand == 3 && MainManager.partyMembers.Contains("Gracy")) return "Gracy";
         else if (rand == 4 && MainManager.partyMembers.Contains("Stacy")) return "Stacy";
         else
         {
-            return "Player";
+            return "Meeri";
         }
     }
 }

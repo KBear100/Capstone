@@ -96,6 +96,7 @@ public class EnemyMap : MonoBehaviour
         if (collision.tag == "Player")
         {
             SceneManager.LoadSceneAsync("Fight1", LoadSceneMode.Additive);
+            MainManager.forestMusic.Stop();
             MainManager.pause = true;
             state = State.FIGHT;
         }

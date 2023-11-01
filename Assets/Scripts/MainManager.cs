@@ -9,17 +9,20 @@ public class MainManager : MonoBehaviour
     [SerializeField] Inventory inv;
     [SerializeField] DialogSystem ds;
     [SerializeField] GameObject ps;
+    [SerializeField] AudioSource music1;
 
     public static Inventory inventory;
     public static GameObject inventoryUI;
     public static DialogSystem dialogSystem;
     public static GameObject pauseScreen;
+    public static AudioSource forestMusic;
     public static float gold = 100;
-    public static float playerHealth = 100;
+    public static float playerHealth = 1;
     public static float steelHealth = 100;
     public static float gracyHealth = 100;
     public static float stacyHealth = 100;
     public static bool pause = false;
+    public static bool destroyManager = false;
     public static float weaponMod = 0;
     public static int partySize = 0;
     public static List<string> partyMembers = new List<string>();
@@ -51,7 +54,15 @@ public class MainManager : MonoBehaviour
             pauseScreen = ps;
         }
 
+        if(forestMusic == null)
+        {
+            forestMusic = music1;
+        }
+
         if (dialogSystem == null) dialogSystem = ds;
+
+        destroyManager = false;
+        pause = false;
 
         instance = this;
         DontDestroyOnLoad(gameObject);
@@ -63,12 +74,20 @@ public class MainManager : MonoBehaviour
         if (steelHealth > maxHealth) steelHealth = maxHealth;
         if (gracyHealth > maxHealth) gracyHealth = maxHealth;
         if (stacyHealth > maxHealth) stacyHealth = maxHealth;
+
+        if (destroyManager) DestroyManager();
     }
 
     public static void ExitInventory()
     {
         inventoryUI.SetActive(false);
         inventory.Clear();
+    }
+
+    public void DestroyManager()
+    {
+        destroyManager = false;
+        Destroy(gameObject);
     }
 
     public static void Pause()
@@ -85,7 +104,6 @@ public class MainManager : MonoBehaviour
 
     public void Title()
     {
-        pause = false;
         Destroy(gameObject);
         SceneManager.LoadSceneAsync("Title", LoadSceneMode.Single);
     }

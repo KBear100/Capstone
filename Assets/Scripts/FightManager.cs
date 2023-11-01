@@ -72,8 +72,21 @@ public class FightManager : MonoBehaviour
             {
                 MainManager.gold += enemy.gold;
                 MainManager.pause = false;
+                MainManager.forestMusic.Play();
                 SceneManager.UnloadSceneAsync("Fight1");
             }
+        }
+
+        if (MainManager.playerHealth <= 0)
+        {
+            fightText.text = "You Lose";
+            doneTimer -= Time.deltaTime;
+            if (doneTimer <= 0)
+            {
+                MainManager.destroyManager = true;
+                SceneManager.LoadSceneAsync("Title", LoadSceneMode.Single);
+            }
+            return;
         }
 
         //Player
@@ -127,12 +140,6 @@ public class FightManager : MonoBehaviour
         //Enemy
         else
         {
-            if (MainManager.playerHealth <= 0)
-            {
-                fightText.text = "You Lose";
-                return;
-            }
-
             enemy.incomingDamage = 1;
             timer -= Time.deltaTime;
 
@@ -144,7 +151,7 @@ public class FightManager : MonoBehaviour
                     float damage = enemy.damage * player.incomingDamage;
                     string attacked = enemy.RandomAttack();
 
-                    if(attacked == "Player") MainManager.playerHealth -= damage;
+                    if(attacked == "Meeri") MainManager.playerHealth -= damage;
                     if(attacked == "Steel") MainManager.steelHealth -= damage;
                     if(attacked == "Gracy") MainManager.gracyHealth -= damage;
                     if(attacked == "Stacy") MainManager.stacyHealth -= damage;
@@ -173,7 +180,7 @@ public class FightManager : MonoBehaviour
         //Attack
         if (action == "Attack")
         {
-            fightText.text = "Enemy Took " + player.damage * enemy.incomingDamage + " Damage.";
+            fightText.text = enemy.type + " Took " + player.damage * enemy.incomingDamage + " Damage.";
             enemy.health -= player.damage;
             swordSwing.Play();
 
