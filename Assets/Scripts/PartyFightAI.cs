@@ -5,6 +5,7 @@ using UnityEngine;
 public class PartyFightAI : MonoBehaviour
 {
     [SerializeField] public string member;
+    [SerializeField] public Animator animator;
 
     [HideInInspector] public bool turn = false;
     [HideInInspector] public string action;
@@ -29,6 +30,7 @@ public class PartyFightAI : MonoBehaviour
     public void Attack()
     {
         damage = Random.Range(1, 6);
+        //animator.SetTrigger("Attack");
         action = "Attack";
     }
 

@@ -182,6 +182,7 @@ public class FightManager : MonoBehaviour
         {
             fightText.text = enemy.type + " Took " + player.damage * enemy.incomingDamage + " Damage.";
             enemy.health -= player.damage;
+            player.animator.SetTrigger("Attack");
             swordSwing.Play();
 
             Clear();

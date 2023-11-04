@@ -6,6 +6,8 @@ using static UnityEditor.Progress;
 
 public class FightPlayer : MonoBehaviour
 {
+    [SerializeField] public Animator animator;
+
     [HideInInspector] public bool turn = true;
     [HideInInspector] public string action;
     [HideInInspector] public float damage;
@@ -29,6 +31,7 @@ public class FightPlayer : MonoBehaviour
     public void Attack()
     {
         damage = Random.Range(1, 6) + MainManager.weaponMod;
+        //animator.SetTrigger("Attack");
         action = "Attack";
     }
 
