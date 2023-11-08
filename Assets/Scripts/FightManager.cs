@@ -103,12 +103,16 @@ public class FightManager : MonoBehaviour
 
         if (!enemy[0].gameObject.activeInHierarchy && !enemy[1].gameObject.activeInHierarchy && !enemy[2].gameObject.activeInHierarchy)
         {
-            fightText.text = "Enemy Defeated! You gain " + enemy[0].gold  + " gold.";
+            if(numEnemies == 1) fightText.text = "Enemy Defeated! You gain " + enemy[0].gold  + " gold.";
+            if(numEnemies == 2) fightText.text = "Enemies Defeated! You gain " + (enemy[0].gold + enemy[1].gold)  + " gold.";
+            if(numEnemies == 3) fightText.text = "Enemies Defeated! You gain " + (enemy[0].gold + enemy[1].gold + enemy[2].gold) + " gold.";
 
             doneTimer -= Time.deltaTime;
             if (doneTimer <= 0)
             {
-                MainManager.gold += enemy[0].gold;
+                if (numEnemies == 1) MainManager.gold += enemy[0].gold;
+                if (numEnemies == 2) MainManager.gold += enemy[0].gold + enemy[1].gold;
+                if (numEnemies == 3) MainManager.gold += enemy[0].gold + enemy[1].gold + enemy[2].gold;
                 MainManager.pause = false;
                 MainManager.forestMusic.Play();
                 SceneManager.UnloadSceneAsync("Fight1");
@@ -125,6 +129,21 @@ public class FightManager : MonoBehaviour
                 SceneManager.LoadSceneAsync("Title", LoadSceneMode.Single);
             }
             return;
+        }
+        if (MainManager.steelHealth <= 0)
+        {
+            partyAI[0].gameObject.SetActive(false);
+            partyAI[0].turn = false;
+        }
+        if (MainManager.gracyHealth <= 0)
+        {
+            partyAI[1].gameObject.SetActive(false);
+            partyAI[1].turn = false;
+        }
+        if (MainManager.stacyHealth <= 0)
+        {
+            partyAI[2].gameObject.SetActive(false);
+            partyAI[2].turn = false;
         }
 
         //Player
@@ -185,14 +204,17 @@ public class FightManager : MonoBehaviour
         //Enemies
         else if (enemy[0].turn)
         {
+            enemy[0].incomingDamage = 1;
             EnemyTurn(enemy[0]);
         }
         else if (enemy[1].turn)
         {
+            enemy[1].incomingDamage = 1;
             EnemyTurn(enemy[1]);
         }
         else if (enemy[2].turn)
         {
+            enemy[2].incomingDamage = 1;
             EnemyTurn(enemy[2]);
         }
         //Repeat
@@ -214,15 +236,15 @@ public class FightManager : MonoBehaviour
             if(numEnemies >= 2)
             {
                 fightText.text = "Choose an enemy to attack.";
-                targetButtons[0].SetActive(true);
-                targetButtons[1].SetActive(true);
-                if(numEnemies == 3) targetButtons[2].SetActive(true);
+                if (enemy[0].gameObject.activeInHierarchy) targetButtons[0].SetActive(true);
+                if (enemy[1].gameObject.activeInHierarchy) targetButtons[1].SetActive(true);
+                if(numEnemies == 3) if (enemy[2].gameObject.activeInHierarchy) targetButtons[2].SetActive(true);
                 return;
                 //To attack function
             }
-
-            fightText.text = enemy[0].type + " Took " + player.damage * enemy[0].incomingDamage + " Damage.";
-            enemy[0].health -= player.damage;
+            float damage = player.damage * enemy[0].incomingDamage;
+            fightText.text = enemy[0].type + " Took " + damage + " Damage.";
+            enemy[0].health -= damage;
             player.animator.SetTrigger("Attack");
             swordSwing.Play();
 
@@ -233,7 +255,7 @@ public class FightManager : MonoBehaviour
         else if (action == "Defend")
         {
             fightText.text = "Meeri Defended";
-
+            player.incomingDamage = 0.5f;
             Clear();
             player.turn = false;
         }
@@ -255,9 +277,9 @@ public class FightManager : MonoBehaviour
             if (numEnemies >= 2)
             {
                 fightText.text = "Choose an enemy to attack.";
-                targetButtons[0].SetActive(true);
-                targetButtons[1].SetActive(true);
-                if (numEnemies == 3) targetButtons[2].SetActive(true);
+                if (enemy[0].gameObject.activeInHierarchy) targetButtons[0].SetActive(true);
+                if (enemy[1].gameObject.activeInHierarchy) targetButtons[1].SetActive(true);
+                if (numEnemies == 3) if (enemy[2].gameObject.activeInHierarchy) targetButtons[2].SetActive(true);
                 return;
                 //To attack function
             }
@@ -274,7 +296,7 @@ public class FightManager : MonoBehaviour
         else if (action == "Defend")
         {
             fightText.text = member.member + " Defended";
-
+            member.incomingDamage = 0.5f;
             Clear();
             member.turn = false;
         }
@@ -291,26 +313,44 @@ public class FightManager : MonoBehaviour
     private void EnemyTurn(AttackingEnemy enemy)
     {
         enemy.Turn();
-        enemy.incomingDamage = 1;
         timer -= Time.deltaTime;
 
         if (timer <= 0)
         {
             if (enemy.action == 1)
             {
-                float damage = enemy.damage * player.incomingDamage;
                 string attacked = enemy.RandomAttack();
+                float damage = 0;
 
-                if (attacked == "Meeri") MainManager.playerHealth -= damage;
-                if (attacked == "Steel") MainManager.steelHealth -= damage;
-                if (attacked == "Gracy") MainManager.gracyHealth -= damage;
-                if (attacked == "Stacy") MainManager.stacyHealth -= damage;
-
-                fightText.text = attacked + " Took " + damage + " Damage!";
+                if (attacked == "Meeri")
+                {
+                    damage = enemy.damage * player.incomingDamage;
+                    MainManager.playerHealth -= damage;
+                    fightText.text = attacked + " Took " + damage + " Damage!";
+                }
+                if (attacked == "Steel")
+                {
+                    damage = enemy.damage * partyAI[0].incomingDamage;
+                    MainManager.steelHealth -= damage;
+                    fightText.text = attacked + " Took " + damage + " Damage!";
+                }
+                if (attacked == "Gracy")
+                {
+                    damage = enemy.damage * partyAI[1].incomingDamage;
+                    MainManager.gracyHealth -= damage;
+                    fightText.text = attacked + " Took " + damage + " Damage!";
+                }
+                if (attacked == "Stacy")
+                {
+                    damage = enemy.damage * partyAI[2].incomingDamage;
+                    MainManager.stacyHealth -= damage;
+                    fightText.text = attacked + " Took " + damage + " Damage!";
+                }
             }
             else if (enemy.action == 2)
             {
                 fightText.text = enemy.type + " Defended";
+                enemy.incomingDamage = 0.5f;
             }
             enemy.action = 0;
             enemy.turn = false;
@@ -336,8 +376,9 @@ public class FightManager : MonoBehaviour
             PartyAttack(enemy, partyAI[2]);
             return;
         }
-        fightText.text = enemy.type + " Took " + player.damage * enemy.incomingDamage + " Damage.";
-        enemy.health -= player.damage;
+        float damage = player.damage * enemy.incomingDamage;
+        fightText.text = enemy.type + " Took " + damage + " Damage.";
+        enemy.health -= damage;
         player.animator.SetTrigger("Attack");
         swordSwing.Play();
 
@@ -352,8 +393,9 @@ public class FightManager : MonoBehaviour
     private void PartyAttack(AttackingEnemy enemy, PartyFightAI member)
     {
         if (player.turn) return;
-        fightText.text = enemy.type + " Took " + member.damage * enemy.incomingDamage + " Damage.";
-        enemy.health -= member.damage;
+        float damage = member.damage * enemy.incomingDamage;
+        fightText.text = enemy.type + " Took " + damage + " Damage.";
+        enemy.health -= damage;
         swordSwing.Play();
         member.animator.SetTrigger("Attack");
 

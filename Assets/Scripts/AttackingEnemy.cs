@@ -18,7 +18,6 @@ public class AttackingEnemy : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         type = MainManager.enemyTypes[Random.Range(0, MainManager.enemyTypes.Length)];
-        Debug.Log(type);
         switch(type)
         {
             case "Zombie":

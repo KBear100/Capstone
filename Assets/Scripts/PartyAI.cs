@@ -141,7 +141,6 @@ public class PartyAI : MonoBehaviour
         team = true;
         MainManager.partySize++;
         MainManager.partyMembers.Add(partyMember);
-        Debug.Log(MainManager.partySize);
     }
 
     private void SteelIntro()
