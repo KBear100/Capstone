@@ -14,28 +14,54 @@ public class FightManager : MonoBehaviour
     [Header("Party")]
     [SerializeField] PartyFightAI[] partyAI;
     [Header("Enemy")]
-    [SerializeField] AttackingEnemy enemy;
+    [SerializeField] AttackingEnemy[] enemy;
     [Header("UI")]
     [SerializeField] TMP_Text fightText;
     [SerializeField] Slider playerHealthUI;
     [SerializeField] Slider steelHealthUI;
     [SerializeField] Slider gracyHealthUI;
     [SerializeField] Slider stacyHealthUI;
-    [SerializeField] Slider enemyHealthUI;
-    [SerializeField] TMP_Text enemyName;
+    [SerializeField] Slider[] enemyHealthUI;
+    [SerializeField] TMP_Text[] enemyName;
+    [SerializeField] GameObject[] targetButtons;
     [SerializeField] float wait;
 
     float timer;
     float doneTimer;
+    int numEnemies = 1;
+    int targetedEnemy;
 
     void Start()
     {
-        fightText.text = "A " + enemy.type + " Approaches. Prepare to Fight!";
-        enemyName.text = enemy.type;
-
+        if (MainManager.partySize > 0) numEnemies = 2;
+        if (MainManager.partySize > 2) numEnemies = 3;
         timer = wait;
         doneTimer = wait;
-        enemyHealthUI.maxValue = enemy.health;
+
+        if (numEnemies >= 2) enemy[1].gameObject.SetActive(true);
+        if (numEnemies == 3) enemy[2].gameObject.SetActive(true);
+
+        if (numEnemies == 1) fightText.text = "A " + enemy[0].type + " Approaches. Prepare to Fight!";
+        else fightText.text = "A group of enemies approach. Prepare to Fight!";
+
+        enemyName[0].text = enemy[0].type;
+        enemyHealthUI[0].maxValue = enemy[0].health;
+
+        if (numEnemies >= 2)
+        {
+            enemyName[1].text = enemy[1].type;
+            enemyHealthUI[1].gameObject.SetActive(true);
+            enemyName[1].gameObject.SetActive(true);
+            enemyHealthUI[1].maxValue = enemy[1].health;
+        }
+        if (numEnemies == 3)
+        {
+            enemyName[2].text = enemy[2].type;
+            enemyHealthUI[2].gameObject.SetActive(true);
+            enemyName[2].gameObject.SetActive(true);
+            enemyHealthUI[2].maxValue = enemy[2].health;
+        }
+
         playerHealthUI.value = MainManager.playerHealth;
 
         if (MainManager.partyMembers.Contains("Steel"))
@@ -61,16 +87,28 @@ public class FightManager : MonoBehaviour
         steelHealthUI.value = MainManager.steelHealth;
         gracyHealthUI.value = MainManager.gracyHealth;
         stacyHealthUI.value = MainManager.stacyHealth;
-        enemyHealthUI.value = enemy.health;
+        enemyHealthUI[0].value = enemy[0].health;
+        enemyHealthUI[1].value = enemy[1].health;
+        enemyHealthUI[2].value = enemy[2].health;
 
-        if (enemy.health <= 0)
+        foreach(AttackingEnemy foe in enemy)
         {
-            fightText.text = "Enemy Defeated! You gain " + enemy.gold + " gold.";
+            if (foe.gameObject.activeInHierarchy && foe.health <= 0)
+            {
+                foe.gameObject.SetActive(false);
+                foe.turn = false;
+                fightText.text = foe.type + " defeated";
+            }
+        }
+
+        if (!enemy[0].gameObject.activeInHierarchy && !enemy[1].gameObject.activeInHierarchy && !enemy[2].gameObject.activeInHierarchy)
+        {
+            fightText.text = "Enemy Defeated! You gain " + enemy[0].gold  + " gold.";
 
             doneTimer -= Time.deltaTime;
             if (doneTimer <= 0)
             {
-                MainManager.gold += enemy.gold;
+                MainManager.gold += enemy[0].gold;
                 MainManager.pause = false;
                 MainManager.forestMusic.Play();
                 SceneManager.UnloadSceneAsync("Fight1");
@@ -99,6 +137,13 @@ public class FightManager : MonoBehaviour
             {
                 fightText.text = "Meeri's Turn";
                 PlayerTurn(player.action);
+                foreach (AttackingEnemy foe in enemy)
+                {
+                    if (foe.gameObject.activeInHierarchy)
+                    {
+                        foe.turn = true;
+                    }
+                }
             }
         }
         //Steel
@@ -137,40 +182,26 @@ public class FightManager : MonoBehaviour
                 PartyTurn(partyAI[2], partyAI[2].action);
             }
         }
-        //Enemy
+        //Enemies
+        else if (enemy[0].turn)
+        {
+            EnemyTurn(enemy[0]);
+        }
+        else if (enemy[1].turn)
+        {
+            EnemyTurn(enemy[1]);
+        }
+        else if (enemy[2].turn)
+        {
+            EnemyTurn(enemy[2]);
+        }
+        //Repeat
         else
         {
-            enemy.incomingDamage = 1;
-            timer -= Time.deltaTime;
-
-            if(timer <= 0)
+            player.turn = true;
+            foreach (PartyFightAI party in partyAI)
             {
-                enemy.Turn();
-                if(enemy.turn == 1)
-                {
-                    float damage = enemy.damage * player.incomingDamage;
-                    string attacked = enemy.RandomAttack();
-
-                    if(attacked == "Meeri") MainManager.playerHealth -= damage;
-                    if(attacked == "Steel") MainManager.steelHealth -= damage;
-                    if(attacked == "Gracy") MainManager.gracyHealth -= damage;
-                    if(attacked == "Stacy") MainManager.stacyHealth -= damage;
-
-                    fightText.text = attacked + " Took " + damage + " Damage!";
-                }
-                else if(enemy.turn == 2)
-                {
-                    fightText.text = "Enemy Defended";
-                }
-                enemy.turn = 0;
-                player.incomingDamage = 1;
-
-                player.turn = true;
-                foreach(PartyFightAI party in partyAI)
-                {
-                    if (party.gameObject.activeInHierarchy) party.turn = true;
-                }
-                timer = wait;
+                if (party.gameObject.activeInHierarchy) party.turn = true;
             }
         }
     }
@@ -180,8 +211,18 @@ public class FightManager : MonoBehaviour
         //Attack
         if (action == "Attack")
         {
-            fightText.text = enemy.type + " Took " + player.damage * enemy.incomingDamage + " Damage.";
-            enemy.health -= player.damage;
+            if(numEnemies >= 2)
+            {
+                fightText.text = "Choose an enemy to attack.";
+                targetButtons[0].SetActive(true);
+                targetButtons[1].SetActive(true);
+                if(numEnemies == 3) targetButtons[2].SetActive(true);
+                return;
+                //To attack function
+            }
+
+            fightText.text = enemy[0].type + " Took " + player.damage * enemy[0].incomingDamage + " Damage.";
+            enemy[0].health -= player.damage;
             player.animator.SetTrigger("Attack");
             swordSwing.Play();
 
@@ -211,8 +252,18 @@ public class FightManager : MonoBehaviour
         //Attack
         if (action == "Attack")
         {
-            fightText.text = "Enemy Took " + member.damage * enemy.incomingDamage + " Damage.";
-            enemy.health -= member.damage;
+            if (numEnemies >= 2)
+            {
+                fightText.text = "Choose an enemy to attack.";
+                targetButtons[0].SetActive(true);
+                targetButtons[1].SetActive(true);
+                if (numEnemies == 3) targetButtons[2].SetActive(true);
+                return;
+                //To attack function
+            }
+
+            fightText.text = enemy[0].type + " Took " + member.damage * enemy[0].incomingDamage + " Damage.";
+            enemy[0].health -= member.damage;
             swordSwing.Play();
             member.animator.SetTrigger("Attack");
 
@@ -235,6 +286,83 @@ public class FightManager : MonoBehaviour
             Clear();
             member.turn = false;
         }
+    }
+
+    private void EnemyTurn(AttackingEnemy enemy)
+    {
+        enemy.Turn();
+        enemy.incomingDamage = 1;
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            if (enemy.action == 1)
+            {
+                float damage = enemy.damage * player.incomingDamage;
+                string attacked = enemy.RandomAttack();
+
+                if (attacked == "Meeri") MainManager.playerHealth -= damage;
+                if (attacked == "Steel") MainManager.steelHealth -= damage;
+                if (attacked == "Gracy") MainManager.gracyHealth -= damage;
+                if (attacked == "Stacy") MainManager.stacyHealth -= damage;
+
+                fightText.text = attacked + " Took " + damage + " Damage!";
+            }
+            else if (enemy.action == 2)
+            {
+                fightText.text = enemy.type + " Defended";
+            }
+            enemy.action = 0;
+            enemy.turn = false;
+            
+            timer = wait;
+        }
+    }
+
+    public void Attack(AttackingEnemy enemy)
+    {
+        if (!player.turn && partyAI[0].turn)
+        {
+            PartyAttack(enemy, partyAI[0]);
+            return;
+        }
+        else if (!player.turn && partyAI[1].turn)
+        {
+            PartyAttack(enemy, partyAI[1]);
+            return;
+        }
+        else if (!player.turn && partyAI[2].turn)
+        {
+            PartyAttack(enemy, partyAI[2]);
+            return;
+        }
+        fightText.text = enemy.type + " Took " + player.damage * enemy.incomingDamage + " Damage.";
+        enemy.health -= player.damage;
+        player.animator.SetTrigger("Attack");
+        swordSwing.Play();
+
+        targetButtons[0].SetActive(false);
+        targetButtons[1].SetActive(false);
+        targetButtons[2].SetActive(false);
+
+        Clear();
+        player.turn = false;
+    }
+
+    private void PartyAttack(AttackingEnemy enemy, PartyFightAI member)
+    {
+        if (player.turn) return;
+        fightText.text = enemy.type + " Took " + member.damage * enemy.incomingDamage + " Damage.";
+        enemy.health -= member.damage;
+        swordSwing.Play();
+        member.animator.SetTrigger("Attack");
+
+        targetButtons[0].SetActive(false);
+        targetButtons[1].SetActive(false);
+        targetButtons[2].SetActive(false);
+
+        Clear();
+        member.turn = false;
     }
 
     public void Clear()

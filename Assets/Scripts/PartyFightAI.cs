@@ -30,7 +30,6 @@ public class PartyFightAI : MonoBehaviour
     public void Attack()
     {
         damage = Random.Range(1, 6);
-        //animator.SetTrigger("Attack");
         action = "Attack";
     }
 

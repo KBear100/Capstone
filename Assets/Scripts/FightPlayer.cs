@@ -31,7 +31,6 @@ public class FightPlayer : MonoBehaviour
     public void Attack()
     {
         damage = Random.Range(1, 6) + MainManager.weaponMod;
-        //animator.SetTrigger("Attack");
         action = "Attack";
     }
 

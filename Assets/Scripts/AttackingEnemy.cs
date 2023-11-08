@@ -9,16 +9,16 @@ public class AttackingEnemy : MonoBehaviour
     [HideInInspector] public float gold;
     [HideInInspector] public float incomingDamage;
     [HideInInspector] public int damage;
-    [HideInInspector] public int turn;
+    [HideInInspector] public int action = 0;
+    [HideInInspector] public bool turn = false;
     [HideInInspector] public string type;
     [HideInInspector] public int maxDamage;
 
-    void Start()
+    void Awake()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        maxDamage = 5;
         type = MainManager.enemyTypes[Random.Range(0, MainManager.enemyTypes.Length)];
-
+        Debug.Log(type);
         switch(type)
         {
             case "Zombie":
@@ -51,8 +51,8 @@ public class AttackingEnemy : MonoBehaviour
 
     public void Turn()
     {
-        turn = Random.Range(1, 3);
-        switch(turn)
+        action = Random.Range(1, 3);
+        switch(action)
         {
             case 1:
                 damage = Random.Range(0, maxDamage + 1);
