@@ -11,6 +11,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] FightPlayer player;
     [Header("Sounds")]
     [SerializeField] AudioSource swordSwing;
+    [SerializeField] AudioSource shield;
     [Header("Party")]
     [SerializeField] PartyFightAI[] partyAI;
     [Header("Enemy")]
@@ -256,6 +257,7 @@ public class FightManager : MonoBehaviour
         {
             fightText.text = "Meeri Defended";
             player.incomingDamage = 0.5f;
+            shield.Play();
             Clear();
             player.turn = false;
         }
@@ -297,6 +299,7 @@ public class FightManager : MonoBehaviour
         {
             fightText.text = member.member + " Defended";
             member.incomingDamage = 0.5f;
+            shield.Play();
             Clear();
             member.turn = false;
         }
@@ -353,6 +356,7 @@ public class FightManager : MonoBehaviour
             {
                 fightText.text = enemy.type + " Defended";
                 enemy.incomingDamage = 0.5f;
+                shield.Play();
             }
             enemy.action = 0;
             enemy.turn = false;
