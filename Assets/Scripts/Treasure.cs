@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class Treasure : MonoBehaviour
 {
+    [SerializeField] AudioSource sound;
     float timer = 2;
     bool found = false;
 
@@ -26,6 +27,7 @@ public class Treasure : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            sound.Play();
             MainManager.inventory.items.Add("Potion");
             MainManager.inventory.numItems++;
             MainManager.dialogSystem.ShowDialog("You found a potion");

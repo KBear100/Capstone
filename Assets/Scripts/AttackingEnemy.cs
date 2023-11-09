@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class AttackingEnemy : MonoBehaviour
 {
+    [Header("Looks")]
     [SerializeField] Sprite[] sprites;
     [SerializeField] public Animator animator;
     [SerializeField] public AnimatorController[] controllers;
+    [Header("Sounds")]
+    [SerializeField] public AudioSource attackSound;
+    [SerializeField] AudioClip[] soundEffects;
     [HideInInspector] public float health;
     [HideInInspector] public float gold;
     [HideInInspector] public float incomingDamage;
@@ -29,6 +33,7 @@ public class AttackingEnemy : MonoBehaviour
                 health = 15;
                 gold = 3;
                 animator.runtimeAnimatorController = controllers[0];
+                attackSound.clip = soundEffects[0];
                 break;
             case "Ninja":
                 spriteRenderer.sprite = sprites[1];
@@ -36,6 +41,7 @@ public class AttackingEnemy : MonoBehaviour
                 health = 20;
                 gold = 5;
                 animator.runtimeAnimatorController = controllers[1];
+                attackSound.clip = soundEffects[1];
                 break;
             case "Sniper":
                 spriteRenderer.sprite = sprites[2];
@@ -43,6 +49,7 @@ public class AttackingEnemy : MonoBehaviour
                 health = 30;
                 gold = 7;
                 animator.runtimeAnimatorController = controllers[2];
+                attackSound.clip = soundEffects[2];
                 break;
         }
 
