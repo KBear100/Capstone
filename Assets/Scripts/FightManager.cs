@@ -321,6 +321,7 @@ public class FightManager : MonoBehaviour
             {
                 string attacked = enemy.RandomAttack();
                 float damage = 0;
+                enemy.animator.SetTrigger("Attack");
 
                 if (attacked == "Meeri")
                 {

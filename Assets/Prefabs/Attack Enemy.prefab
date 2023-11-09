@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7175778254004479846}
   - component: {fileID: 7175778254004479847}
   - component: {fileID: 7175778254004479849}
+  - component: {fileID: 4263903252579681360}
   m_Layer: 0
   m_Name: Attack Enemy
   m_TagString: Untagged
@@ -49,10 +50,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 577b210f53114024da3ee5f135862bcd, type: 3}
   - {fileID: 21300000, guid: a04863c748b201e449abbb2b3e18bfce, type: 3}
   - {fileID: 21300000, guid: 7d154763b06d0ba40b0287dd40f866ba, type: 3}
+  animator: {fileID: 4263903252579681360}
+  controllers:
+  - {fileID: 9100000, guid: 8eadce710cead75419555d93549a94fe, type: 2}
+  - {fileID: 9100000, guid: 96b4e79906d99364995d4dc5da187afb, type: 2}
+  - {fileID: 9100000, guid: 92e5b3ea7cea9e94ab349f902e367d7c, type: 2}
   health: 10
   gold: 3
   incomingDamage: 0
   damage: 0
+  action: 0
   turn: 0
   type: 
   maxDamage: 0
@@ -108,3 +115,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4263903252579681360
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175778254004479848}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

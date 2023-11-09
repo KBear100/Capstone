@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class AttackingEnemy : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
+    [SerializeField] public Animator animator;
+    [SerializeField] public AnimatorController[] controllers;
     [HideInInspector] public float health;
     [HideInInspector] public float gold;
     [HideInInspector] public float incomingDamage;
@@ -25,18 +28,21 @@ public class AttackingEnemy : MonoBehaviour
                 maxDamage = 6;
                 health = 15;
                 gold = 3;
+                animator.runtimeAnimatorController = controllers[0];
                 break;
             case "Ninja":
                 spriteRenderer.sprite = sprites[1];
                 maxDamage = 11;
                 health = 20;
                 gold = 5;
+                animator.runtimeAnimatorController = controllers[1];
                 break;
             case "Sniper":
                 spriteRenderer.sprite = sprites[2];
                 maxDamage = 16;
                 health = 30;
                 gold = 7;
+                animator.runtimeAnimatorController = controllers[2];
                 break;
         }
 
