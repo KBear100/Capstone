@@ -9,10 +9,11 @@ public class TitleScreen : MonoBehaviour
 {
     [SerializeField] float wait;
     [SerializeField] GameObject background;
+    [SerializeField] Image black;
     [SerializeField] Image backgroundImage;
     [SerializeField] TMP_Text story;
 
-    float fade = 1.5f;
+    float fade = 2f;
     float timer;
     bool started;
     bool open;
@@ -21,6 +22,7 @@ public class TitleScreen : MonoBehaviour
     {
         background.SetActive(true);
         story.gameObject.SetActive(false);
+        black.gameObject.SetActive(false);
         timer = wait;
     }
 
@@ -28,7 +30,12 @@ public class TitleScreen : MonoBehaviour
     {
         if (started)
         {
-            backgroundImage.CrossFadeAlpha(0, fade, true);
+            black.gameObject.SetActive(true);
+            Color fadeColor = black.color;
+
+            fadeColor.a += 0.5f * Time.deltaTime;
+            black.color = fadeColor;
+            
             fade -= Time.deltaTime;
             if (fade <= 0)
             {
