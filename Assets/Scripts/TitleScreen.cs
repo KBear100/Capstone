@@ -9,14 +9,20 @@ public class TitleScreen : MonoBehaviour
 {
     [SerializeField] float wait;
     [SerializeField] GameObject background;
-    [SerializeField] Image black;
     [SerializeField] Image backgroundImage;
+    [SerializeField] Image black;
     [SerializeField] TMP_Text story;
+    [Header("Cloud")]
+    [SerializeField] GameObject cloud;
+    [SerializeField] float cloudSpeed;
+    [SerializeField] Transform[] cloudPos;
 
     float fade = 2f;
     float timer;
     bool started;
     bool open;
+    bool pos1;
+    bool right;
 
     private void Start()
     {
@@ -24,10 +30,34 @@ public class TitleScreen : MonoBehaviour
         story.gameObject.SetActive(false);
         black.gameObject.SetActive(false);
         timer = wait;
+        pos1 = true;
+        right = true;
     }
 
     private void Update()
     {
+        if (cloud.transform.position.x <= 1150 && right)
+        {
+            if (!pos1)
+            {
+                cloud.transform.position = cloudPos[0].position;
+                pos1 = true;
+            }
+            cloud.transform.position += Vector3.right * cloudSpeed;
+            right = true;
+        }
+        else if (cloud.transform.position.x >= -175)
+        {
+            if (pos1)
+            {
+                cloud.transform.position = cloudPos[1].position;
+                pos1 = false;
+                right = false;
+            }
+            cloud.transform.position += Vector3.left * cloudSpeed;
+            if (cloud.transform.position.x <= -175) right = true;
+        }
+
         if (started)
         {
             black.gameObject.SetActive(true);
