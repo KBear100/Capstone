@@ -2053,6 +2053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 193535585}
+  - component: {fileID: 193535588}
   - component: {fileID: 193535587}
   - component: {fileID: 193535586}
   m_Layer: 0
@@ -2146,7 +2147,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84a0082a671cb3642819cc69b89b9353, type: 3}
-  m_Color: {r: 0, g: 0.1981132, b: 0.09084702, a: 1}
+  m_Color: {r: 0, g: 0.3301887, b: 0.14890863, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2156,6 +2157,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &193535588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193535584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3e1955de8f97e42b9aab741d1678e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 2
 --- !u!1 &197042613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,6 +3002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 269286858}
+  - component: {fileID: 269286860}
   - component: {fileID: 269286857}
   - component: {fileID: 269286859}
   m_Layer: 0
@@ -3039,7 +3054,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84a0082a671cb3642819cc69b89b9353, type: 3}
-  m_Color: {r: 0, g: 0.1981132, b: 0.09084702, a: 1}
+  m_Color: {r: 0, g: 0.3301887, b: 0.14890863, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3091,6 +3106,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &269286860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269286856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3e1955de8f97e42b9aab741d1678e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 2
 --- !u!1 &270808711
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,6 +6567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 553353185}
+  - component: {fileID: 553353188}
   - component: {fileID: 553353187}
   - component: {fileID: 553353186}
   m_Layer: 0
@@ -6632,7 +6661,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84a0082a671cb3642819cc69b89b9353, type: 3}
-  m_Color: {r: 0, g: 0.1981132, b: 0.09084702, a: 1}
+  m_Color: {r: 0, g: 0.3301887, b: 0.14890863, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6642,6 +6671,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &553353188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553353184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3e1955de8f97e42b9aab741d1678e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 2
 --- !u!1 &577605823
 GameObject:
   m_ObjectHideFlags: 0
@@ -9553,6 +9595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819967835}
+  - component: {fileID: 819967838}
   - component: {fileID: 819967837}
   - component: {fileID: 819967836}
   m_Layer: 0
@@ -9646,7 +9689,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84a0082a671cb3642819cc69b89b9353, type: 3}
-  m_Color: {r: 0, g: 0.1981132, b: 0.09084702, a: 1}
+  m_Color: {r: 0, g: 0.3301887, b: 0.14890863, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9656,6 +9699,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &819967838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819967834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3e1955de8f97e42b9aab741d1678e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 2
 --- !u!1 &844109114
 GameObject:
   m_ObjectHideFlags: 0
