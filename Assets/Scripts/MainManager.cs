@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,13 +9,17 @@ public class MainManager : MonoBehaviour
     [SerializeField] GameObject invUI;
     [SerializeField] Inventory inv;
     [SerializeField] DialogSystem ds;
+    [SerializeField] Settings settingsScript;
     [SerializeField] GameObject ps;
+    [SerializeField] GameObject settingsScreen;
     [SerializeField] AudioSource music1;
 
     public static Inventory inventory;
     public static GameObject inventoryUI;
     public static DialogSystem dialogSystem;
+    public static Settings settings;
     public static GameObject pauseScreen;
+    public static GameObject settingsUI;
     public static AudioSource forestMusic;
     public static float gold = 100;
     public static float playerHealth = 100;
@@ -39,27 +44,17 @@ public class MainManager : MonoBehaviour
             return;
         }
 
-        if(inventoryUI == null)
-        {
-            inventoryUI = invUI;
-        }
+        if(inventoryUI == null) inventoryUI = invUI;
 
-        if(inventory == null)
-        {
-            inventory = inv;
-        }
+        if(inventory == null) inventory = inv;
 
-        if(pauseScreen == null)
-        {
-            pauseScreen = ps;
-        }
+        if(pauseScreen == null) pauseScreen = ps;
 
-        if(forestMusic == null)
-        {
-            forestMusic = music1;
-        }
+        if(forestMusic == null) forestMusic = music1;
 
         if (dialogSystem == null) dialogSystem = ds;
+
+        if (settingsUI == null) settingsUI = settingsScreen;
 
         destroyManager = false;
         pause = false;
@@ -94,12 +89,19 @@ public class MainManager : MonoBehaviour
     {
         pause = true;
         pauseScreen.SetActive(true);
+        settingsUI.SetActive(false);
     }
 
     public static void Resume()
     {
         pause = false;
         pauseScreen.SetActive(false);
+    }
+
+    public void Settings()
+    {
+        if(!settingsUI.activeInHierarchy) settingsUI.SetActive(true);
+        else settingsUI.SetActive(false);
     }
 
     public void Title()
