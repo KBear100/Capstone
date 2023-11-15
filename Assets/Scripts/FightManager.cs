@@ -26,8 +26,10 @@ public class FightManager : MonoBehaviour
     [SerializeField] TMP_Text[] enemyName;
     [SerializeField] GameObject[] targetButtons;
     [SerializeField] float wait;
+    [SerializeField] float colorWait;
 
     float timer;
+    float colorTimer;
     float doneTimer;
     int numEnemies = 1;
     int targetedEnemy;
@@ -84,6 +86,21 @@ public class FightManager : MonoBehaviour
 
     void Update()
     {
+        if(colorTimer > 0)
+        {
+            colorTimer -= Time.deltaTime;
+        }
+        else
+        {
+            player.GetComponent<SpriteRenderer>().color = Color.white;
+            partyAI[0].GetComponent<SpriteRenderer>().color = Color.white;
+            partyAI[1].GetComponent<SpriteRenderer>().color = Color.white;
+            partyAI[2].GetComponent<SpriteRenderer>().color = Color.white;
+            enemy[0].GetComponent<SpriteRenderer>().color = Color.white;
+            enemy[1].GetComponent<SpriteRenderer>().color = Color.white;
+            enemy[2].GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
         playerHealthUI.value = MainManager.playerHealth;
         steelHealthUI.value = MainManager.steelHealth;
         gracyHealthUI.value = MainManager.gracyHealth;
@@ -92,7 +109,7 @@ public class FightManager : MonoBehaviour
         enemyHealthUI[1].value = enemy[1].health;
         enemyHealthUI[2].value = enemy[2].health;
 
-        foreach(AttackingEnemy foe in enemy)
+        foreach (AttackingEnemy foe in enemy)
         {
             if (foe.gameObject.activeInHierarchy && foe.health <= 0)
             {
@@ -243,11 +260,13 @@ public class FightManager : MonoBehaviour
                 return;
                 //To attack function
             }
+
             float damage = player.damage * enemy[0].incomingDamage;
             fightText.text = enemy[0].type + " Took " + damage + " Damage.";
             enemy[0].health -= damage;
             player.animator.SetTrigger("Attack");
             swordSwing.Play();
+            Damaged(enemy[0].gameObject);
 
             Clear();
             player.turn = false;
@@ -285,7 +304,6 @@ public class FightManager : MonoBehaviour
                 return;
                 //To attack function
             }
-
             fightText.text = enemy[0].type + " Took " + member.damage * enemy[0].incomingDamage + " Damage.";
             enemy[0].health -= member.damage;
             swordSwing.Play();
@@ -329,24 +347,28 @@ public class FightManager : MonoBehaviour
 
                 if (attacked == "Meeri")
                 {
+                    Damaged(player.gameObject);
                     damage = enemy.damage * player.incomingDamage;
                     MainManager.playerHealth -= damage;
                     fightText.text = attacked + " Took " + damage + " Damage!";
                 }
                 if (attacked == "Steel")
                 {
+                    Damaged(partyAI[0].gameObject);
                     damage = enemy.damage * partyAI[0].incomingDamage;
                     MainManager.steelHealth -= damage;
                     fightText.text = attacked + " Took " + damage + " Damage!";
                 }
                 if (attacked == "Gracy")
                 {
+                    Damaged(partyAI[1].gameObject);
                     damage = enemy.damage * partyAI[1].incomingDamage;
                     MainManager.gracyHealth -= damage;
                     fightText.text = attacked + " Took " + damage + " Damage!";
                 }
                 if (attacked == "Stacy")
                 {
+                    Damaged(partyAI[2].gameObject);
                     damage = enemy.damage * partyAI[2].incomingDamage;
                     MainManager.stacyHealth -= damage;
                     fightText.text = attacked + " Took " + damage + " Damage!";
@@ -387,6 +409,7 @@ public class FightManager : MonoBehaviour
         enemy.health -= damage;
         player.animator.SetTrigger("Attack");
         swordSwing.Play();
+        Damaged(enemy.gameObject);
 
         targetButtons[0].SetActive(false);
         targetButtons[1].SetActive(false);
@@ -404,6 +427,7 @@ public class FightManager : MonoBehaviour
         enemy.health -= damage;
         swordSwing.Play();
         member.animator.SetTrigger("Attack");
+        Damaged(enemy.gameObject);
 
         targetButtons[0].SetActive(false);
         targetButtons[1].SetActive(false);
@@ -421,5 +445,14 @@ public class FightManager : MonoBehaviour
             party.action = "";
             timer = wait;
         }
+    }
+
+    public void Damaged(GameObject charater)
+    {
+        Color damageColor = Color.red;
+
+        charater.GetComponent<SpriteRenderer>().color = damageColor;
+
+        colorTimer = colorWait;
     }
 }

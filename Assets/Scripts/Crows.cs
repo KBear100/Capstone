@@ -31,7 +31,7 @@ public class Crows : MonoBehaviour
             }
             else
             {
-                crow.transform.position += Vector3.right * speed;
+                crow.transform.position += Vector3.right * speed * Time.deltaTime;
                 moving = true;
             }
 

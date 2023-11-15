@@ -10239,7 +10239,7 @@ MonoBehaviour:
   crow: {fileID: 799351343}
   spawnPoint: {fileID: 7811042346321800834}
   wait: 10
-  speed: 0.02
+  speed: 13
 --- !u!4 &822241021
 Transform:
   m_ObjectHideFlags: 0
