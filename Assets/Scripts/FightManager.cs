@@ -25,6 +25,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] Slider[] enemyHealthUI;
     [SerializeField] TMP_Text[] enemyName;
     [SerializeField] GameObject[] targetButtons;
+    [SerializeField] GameObject[] shieldSprite;
     [SerializeField] float wait;
     [SerializeField] float colorWait;
 
@@ -82,6 +83,8 @@ public class FightManager : MonoBehaviour
             partyAI[2].gameObject.SetActive(true);
             stacyHealthUI.gameObject.SetActive(true);
         }
+
+        foreach (var shield in shieldSprite) shield.SetActive(false);
     }
 
     void Update()
@@ -168,6 +171,7 @@ public class FightManager : MonoBehaviour
         if (player.turn)
         {
             player.incomingDamage = 1;
+            shieldSprite[0].SetActive(false);
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -187,6 +191,7 @@ public class FightManager : MonoBehaviour
         else if (partyAI[0].turn)
         {
             partyAI[0].incomingDamage = 1;
+            shieldSprite[1].SetActive(false);
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -199,6 +204,7 @@ public class FightManager : MonoBehaviour
         else if (partyAI[1].turn)
         {
             partyAI[1].incomingDamage = 1;
+            shieldSprite[2].SetActive(false);
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -211,6 +217,7 @@ public class FightManager : MonoBehaviour
         else if (partyAI[2].turn)
         {
             partyAI[2].incomingDamage = 1;
+            shieldSprite[3].SetActive(false);
             timer -= Time.deltaTime;
 
             if (timer <= 0)
@@ -223,17 +230,20 @@ public class FightManager : MonoBehaviour
         else if (enemy[0].turn)
         {
             enemy[0].incomingDamage = 1;
-            EnemyTurn(enemy[0]);
+            shieldSprite[4].SetActive(false);
+            EnemyTurn(enemy[0], 0);
         }
         else if (enemy[1].turn)
         {
             enemy[1].incomingDamage = 1;
-            EnemyTurn(enemy[1]);
+            shieldSprite[5].SetActive(false);
+            EnemyTurn(enemy[1], 1);
         }
         else if (enemy[2].turn)
         {
             enemy[2].incomingDamage = 1;
-            EnemyTurn(enemy[2]);
+            shieldSprite[6].SetActive(false);
+            EnemyTurn(enemy[2], 2);
         }
         //Repeat
         else
@@ -277,6 +287,7 @@ public class FightManager : MonoBehaviour
             fightText.text = "Meeri Defended";
             player.incomingDamage = 0.5f;
             shield.Play();
+            shieldSprite[0].SetActive(true);
             Clear();
             player.turn = false;
         }
@@ -318,6 +329,9 @@ public class FightManager : MonoBehaviour
             fightText.text = member.member + " Defended";
             member.incomingDamage = 0.5f;
             shield.Play();
+            if (member.member == "Steel") shieldSprite[1].SetActive(true);
+            if (member.member == "Gracy") shieldSprite[2].SetActive(true);
+            if (member.member == "Stacy") shieldSprite[3].SetActive(true);
             Clear();
             member.turn = false;
         }
@@ -331,7 +345,7 @@ public class FightManager : MonoBehaviour
         }
     }
 
-    private void EnemyTurn(AttackingEnemy enemy)
+    private void EnemyTurn(AttackingEnemy enemy, int num)
     {
         enemy.Turn();
         timer -= Time.deltaTime;
@@ -379,6 +393,9 @@ public class FightManager : MonoBehaviour
                 fightText.text = enemy.type + " Defended";
                 enemy.incomingDamage = 0.5f;
                 shield.Play();
+                if(num == 0) shieldSprite[4].SetActive(true);
+                if(num == 1) shieldSprite[5].SetActive(true);
+                if(num == 2) shieldSprite[6].SetActive(true);
             }
             enemy.action = 0;
             enemy.turn = false;
