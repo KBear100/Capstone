@@ -25,7 +25,7 @@ public class Border : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            MainManager.dialogSystem.ShowDialog("I should keep going towards the colosseum");
+            MainManager.dialogSystem.ShowDialog("I should keep going towards the colosseum", "Meeri");
             timer = wait;
             shown = true;
         }

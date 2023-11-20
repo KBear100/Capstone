@@ -30,7 +30,7 @@ public class Treasure : MonoBehaviour
             sound.Play();
             MainManager.inventory.items.Add("Potion");
             MainManager.inventory.numItems++;
-            MainManager.dialogSystem.ShowDialog("You found a potion");
+            MainManager.dialogSystem.ShowDialogWithoutName("You found a potion");
             MainManager.pause = true;
             found = true;
         }

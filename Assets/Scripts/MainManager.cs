@@ -27,6 +27,7 @@ public class MainManager : MonoBehaviour
     public static float gracyHealth = 100;
     public static float stacyHealth = 100;
     public static bool pause = false;
+    public static bool destroySilver = false;
     public static bool destroyManager = false;
     public static float weaponMod = 0;
     public static int partySize = 0;

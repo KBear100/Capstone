@@ -11,19 +11,14 @@ public class PartyAI : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] float speed;
     [SerializeField] float distance;
-    [SerializeField] float dialogTimer;
     [Header("Animation")]
     [SerializeField] Animator animator;
 
     bool team = false;
     bool faceRight = true;
-    bool steelIntro = false;
-    bool gracyIntro = false;
-    bool stacyIntro = false;
     Vector2 vel = Vector2.zero;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
-    float timer;
 
     void Start()
     {
@@ -31,14 +26,10 @@ public class PartyAI : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreCollision(player.gameObject.GetComponent<Collider2D>(), GetComponent<CapsuleCollider2D>());
         team = false;
-        timer = dialogTimer;
     }
 
     void Update()
     {
-        if(steelIntro) SteelIntro();
-        if(gracyIntro) GracyIntro();
-        if(stacyIntro) StacyIntro();
         if (team)
         {
             Vector2 dir = Vector2.zero;
@@ -68,6 +59,7 @@ public class PartyAI : MonoBehaviour
 
             rb.velocity = vel;
         }
+        if (MainManager.destroySilver == true) Destroy(silver);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,57 +68,48 @@ public class PartyAI : MonoBehaviour
         {
             if (partyMember == "Steel")
             {
-                steelIntro = true;
+                MainManager.dialogSystem.StartSystem("Steel", 0, 1);
+                MainManager.pause = true;
             }
 
             if(partyMember == "Gracy")
             {
-                gracyIntro = true;
+                MainManager.dialogSystem.StartSystem("Gracy", 0, 0);
+                MainManager.pause = true;
             }
 
             if (partyMember == "Stacy")
             {
-                stacyIntro = true;
+                MainManager.dialogSystem.StartSystem("Stacy", 0, 0);
+                MainManager.pause = true;
             }
+            JoinParty();
         }
 
         if(collision.tag == "Player")
         {
             if (partyMember == "Steel")
             {
-                player.GetComponent<PlayerController>().steelTalk = true;
+                player.GetComponent<PlayerController>().talkingTo = "Steel";
             }
 
             if (partyMember == "Gracy")
             {
-                player.GetComponent<PlayerController>().gracyTalk = true;
+                player.GetComponent<PlayerController>().talkingTo = "Gracy";
             }
 
             if (partyMember == "Stacy")
             {
-                player.GetComponent<PlayerController>().stacyTalk = true;
+                player.GetComponent<PlayerController>().talkingTo = "Stacy";
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if(collision.tag == "Player")
         {
-            if (partyMember == "Steel")
-            {
-                player.GetComponent<PlayerController>().steelTalk = false;
-            }
-
-            if (partyMember == "Gracy")
-            {
-                player.GetComponent<PlayerController>().gracyTalk = false;
-            }
-
-            if (partyMember == "Stacy")
-            {
-                player.GetComponent<PlayerController>().stacyTalk = false;
-            }
+            player.GetComponent<PlayerController>().talkingTo = "";
         }
     }
 
@@ -141,58 +124,5 @@ public class PartyAI : MonoBehaviour
         team = true;
         MainManager.partySize++;
         MainManager.partyMembers.Add(partyMember);
-    }
-
-    private void SteelIntro()
-    {
-        MainManager.pause = true;
-        if(MainManager.dialogSystem.text.text == "") MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.steelDialog.dialog[0]);
-        timer -= Time.deltaTime;
-        if (timer <= 0 && MainManager.dialogSystem.text.text == MainManager.dialogSystem.steelDialog.dialog[1])
-        {
-            MainManager.dialogSystem.ExitDialog();
-            Destroy(silver);
-            JoinParty();
-            MainManager.pause = false;
-            timer = dialogTimer;
-            steelIntro = false;
-        }
-        else if (timer <= 0)
-        {
-            timer = dialogTimer;
-            MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.steelDialog.dialog[1]);
-        }
-    }
-
-    private void GracyIntro()
-    {
-        MainManager.pause = true;
-        if (MainManager.dialogSystem.text.text == "") MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.gracyDialog.dialog[0]);
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            MainManager.dialogSystem.ExitDialog();
-            JoinParty();
-            MainManager.pause = false;
-            gracyIntro = false;
-            timer = dialogTimer;
-        }
-    }
-
-    private void StacyIntro()
-    {
-        MainManager.pause = true;
-        if (MainManager.dialogSystem.text.text == "") MainManager.dialogSystem.ShowDialog(MainManager.dialogSystem.stacyDialog.dialog[0]);
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            MainManager.dialogSystem.ExitDialog();
-            JoinParty();
-            MainManager.pause = false;
-            stacyIntro = false;
-            timer = dialogTimer;
-        }
     }
 }
