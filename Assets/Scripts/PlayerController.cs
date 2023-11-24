@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     bool faceRight = true;
+    bool firstInv = true;
     [HideInInspector] public string talkingTo;
 
     void Start()
@@ -55,6 +56,12 @@ public class PlayerController : MonoBehaviour
             {
                 MainManager.inventoryUI.SetActive(true);
                 MainManager.inventory.Display();
+                if(firstInv)
+                {
+                    MainManager.tutorial.tutorialTxt.text = "Click on the current weapon slot than select the weapon you wish to replace it with.";
+                    MainManager.tutorial.active = true;
+                    firstInv = false;
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))

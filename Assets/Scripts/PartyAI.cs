@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -85,8 +86,7 @@ public class PartyAI : MonoBehaviour
             }
             JoinParty();
         }
-
-        if(collision.tag == "Player")
+        else if(collision.tag == "Player")
         {
             if (partyMember == "Steel")
             {
@@ -102,6 +102,8 @@ public class PartyAI : MonoBehaviour
             {
                 player.GetComponent<PlayerController>().talkingTo = "Stacy";
             }
+            //MainManager.tutorial.tutorialTxt.text = "Press E to Talk to " + partyMember;
+            //MainManager.tutorial.active = true;
         }
     }
 
@@ -110,6 +112,7 @@ public class PartyAI : MonoBehaviour
         if(collision.tag == "Player")
         {
             player.GetComponent<PlayerController>().talkingTo = "";
+            MainManager.tutorial.tutorialTxt.text = "";
         }
     }
 

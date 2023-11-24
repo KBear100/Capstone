@@ -10,6 +10,7 @@ public class MainManager : MonoBehaviour
     [SerializeField] Inventory inv;
     [SerializeField] DialogSystem ds;
     [SerializeField] Settings settingsScript;
+    [SerializeField] Tutorial tutorialScript;
     [SerializeField] GameObject ps;
     [SerializeField] GameObject settingsScreen;
     [SerializeField] AudioSource music1;
@@ -20,6 +21,7 @@ public class MainManager : MonoBehaviour
     public static Settings settings;
     public static GameObject pauseScreen;
     public static GameObject settingsUI;
+    public static Tutorial tutorial;
     public static AudioSource forestMusic;
     public static float gold = 100;
     public static float playerHealth = 100;
@@ -57,6 +59,8 @@ public class MainManager : MonoBehaviour
 
         if (settingsUI == null) settingsUI = settingsScreen;
 
+        if (tutorial == null) tutorial = tutorialScript;
+        
         destroyManager = false;
         pause = false;
 
