@@ -32,11 +32,12 @@ public class TitleScreen : MonoBehaviour
         timer = wait;
         pos1 = true;
         right = true;
+        cloud.transform.position = cloudPos[0].position;
     }
 
     private void Update()
     {
-        if (cloud.transform.position.x <= 1150 && right)
+        if (cloud.transform.position.x <= 2100 && right)
         {
             if (!pos1)
             {
@@ -46,7 +47,7 @@ public class TitleScreen : MonoBehaviour
             cloud.transform.position += Vector3.right * cloudSpeed;
             right = true;
         }
-        else if (cloud.transform.position.x >= -175)
+        else if (cloud.transform.position.x >= -250)
         {
             if (pos1)
             {
