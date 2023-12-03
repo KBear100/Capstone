@@ -13,7 +13,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject textBox;
     public TMP_Text text;
     public TMP_Text nameText;
-    [Header("Stats")]
+    [Header("Timer")]
     [SerializeField] public float dialogTimer;
 
     [HideInInspector] public bool talking = false;
@@ -25,6 +25,7 @@ public class DialogSystem : MonoBehaviour
     void Start()
     {
         text.text = "";
+        nameText.text = "";
         timer = dialogTimer;
     }
 
