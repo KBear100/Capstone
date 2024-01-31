@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class AttackingEnemy : MonoBehaviour
@@ -8,7 +7,7 @@ public class AttackingEnemy : MonoBehaviour
     [Header("Looks")]
     [SerializeField] Sprite[] sprites;
     [SerializeField] public Animator animator;
-    [SerializeField] public AnimatorController[] controllers;
+    [SerializeField] public RuntimeAnimatorController[] controllers;
     [Header("Sounds")]
     [SerializeField] public AudioSource attackSound;
     [SerializeField] AudioClip[] soundEffects;

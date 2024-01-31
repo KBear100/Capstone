@@ -170,6 +170,13 @@ public class FightManager : MonoBehaviour
         //Player
         if (player.turn)
         {
+            if(Input.GetKeyDown(KeyCode.K))
+            {
+                foreach (AttackingEnemy foe in enemy)
+                {
+                    foe.health = 1;
+                }
+            }
             player.incomingDamage = 1;
             shieldSprite[0].SetActive(false);
             timer -= Time.deltaTime;
